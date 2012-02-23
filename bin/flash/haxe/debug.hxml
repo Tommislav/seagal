@@ -1,0 +1,12 @@
+-main ApplicationMain 
+-D nme_install_tool
+-cp src
+-lib nme
+-D web
+-swf-version 10
+-swf9 bin/flash/bin/LD23Engine.swf
+-swf-header 820:480:60:FFFFFF
+-cp bin/flash/haxe
+-D fdb
+--no-inline
+-debug

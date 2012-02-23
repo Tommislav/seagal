@@ -1,0 +1,63 @@
+
+Note: I kind of like the stupid naming. EntityWrapper = EW.
+getEntityWithComponents = getEWC.
+Much faster to type X-D
+
+This is what I would like to be able to do:
+	
+
+var entity:int = manager.allocateEntity();
+manager.addComponent(entity, new PositionComponent(x,y)) -- or -- entity.addComponent(new PositionComponent(x,y));
+
+how about chaining?
+
+ent:EW = manager.allocateEntity().addComponent(new PositionComponent()).addComponent(new VelocityComponent());
+ent.getComponent(VelocityComponent).velocity = 3.5;
+
+EntWrapper (EW) - holds reference to manager and to entity id so we can call entity.addComponent()
+EW.addComponent():EW, removeComponent():EW
+EW.getComponent(Class):<T>
+EW.getEntity():int
+EW.getManager():EntityManager
+EW.remove() // remove from manager, clears all references
+
+
+Should be able to add and remove systems, as well as pause and resume them.
+manager.addSystem(new MongoEnemySystem(),2).start();
+manager.getSystem(MongoEnemySystem).remove();
+Systems should be able to have components on them...?
+
+
+
+entityManager should be able to distinguish from ALL components and VISIBLE component!
+manager.visible.getEWC(RenderComponent);
+manager.active.getEWC(UpdateComponent);
+
+manager.getEWC(...args):Array<EW>
+manager.getEWC(MoveComponent):Array<EntWrapper>
+manager.getEWC(MoveComponent,PositionComponent):Array<EntWrapper>
+manager.getNamed(name:String):EW (there can be only one)
+
+manager.getComponentFromEnt(ent:int, CompClass:Class):<T>
+EW.getComponent(CompClass)
+
+
+serializing would be nice =)
+
+---
+name(name="tommy")
+position(x=1,y=2)
+velocity(velocity=0)
+---
+
+
+
+
+
+Systems:
+	- baseRenderSystem
+		- bitmapDataRenderSystem
+		- displayObjectRenderSystem
+	- collisionSystem
+	- stateSystem (adds and removes states from manager based on state)
+
