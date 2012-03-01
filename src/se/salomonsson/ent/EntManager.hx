@@ -1,5 +1,5 @@
 package se.salomonsson.ent;
-import nme.errors.Error;
+
 
 /**
  * Creates, stores and manages queries on entities
@@ -12,12 +12,13 @@ class EntManager
 	private static var _disposedEntities:Array<Int> = new Array<Int>();
 	
 	private var _entities:Array<Int>;
-	private var _entityHash:Array<IComponent>;
+	private var _entityHash:Array<Array<IComponent>>;
 	
 	
 	public function new() 
 	{
-		_entityHash = new Array<IComponent>();
+		_entities = new Array<Int>();
+		_entityHash = new Array<Array<IComponent>>();
 	}
 	
 	public function allocateEntity():EW
@@ -30,6 +31,9 @@ class EntManager
 			entity = _entityCounter++;
 		}
 		
+		_entities.push(entity);
+		_entityHash[entity] = new Array<IComponent>();
+		
 		return new EW().wrap(entity, this);
 	}
 	
@@ -40,7 +44,7 @@ class EntManager
 	
 	public function addComponentOn(component:IComponent, entity:Int):Void
 	{
-		_entityHash.push(component);
+		_entityHash[entity].push(component);
 	}
 	
 	public function removeComponentFrom(component:IComponent, entity:Int):Void
@@ -50,16 +54,33 @@ class EntManager
 	
 	
 	
-	public function getComponents<T>(componentClass:Class<T>):T
+	public function getComponents<T>(componentClass:Class<T>):Array<T>
 	{
-		var len:Int = _entityHash.length;
+		var ret:Array<T> = new Array<T>();
+		var len:Int = _entities.length;
 		for (i in 0...len)
 		{
-			if (Std.is(_entityHash[i], componentClass))
-				return cast _entityHash[i];
+			var e:Int = _entities[i];
+			var entHash = _entityHash[e];
+			for (j in 0...entHash.length)
+			{
+				if (Std.is(entHash[j], componentClass))
+					ret.push(cast entHash[j]);
+			}
 		}
 		
-		throw new Error("Failed to find component of type " + Type.getClassName(componentClass));
+		//throw new Error("Failed to find component of type " + Type.getClassName(componentClass));
+		return ret;
+	}
+	
+	public function getComponentOnEntity<T>(entity:Int, componentClass:Class<T>):T
+	{
+		var ent = _entityHash[entity];
+		for (i in 0...ent.length)
+		{
+			if (Std.is(ent[i], componentClass))
+				return cast ent[i]; // TODO: Is it possible to remove this cast?
+		}
 		return null;
 	}
 	

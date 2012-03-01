@@ -29,6 +29,21 @@ class EW
 		return this;
 	}
 	
+	/**
+	 * Get component of type <T> registred for this entity.
+	 */
+	public function comp<T>(componentClass:Class<T>):T
+	{
+		var comp = _manager.getComponentOnEntity(_entity, componentClass);
+		//if null, create and register
+		return comp;
+	}
+	
+	public function all():Array<IComponent>
+	{
+		return new Array<IComponent>(); // TODO
+	}
+	
 	public function getEntity():Int { return _entity; }
 	public function getManager():EntManager { return _manager; }
 }
