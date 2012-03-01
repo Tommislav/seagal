@@ -37,5 +37,6 @@ class EntityManagerTest extends TestCase
 		var e2 = manager.allocateEntity().addComponent(new StringComponent("två"));
 		
 		assertEquals("ett", e1.comp(StringComponent).string);
+		assertEquals("två", e2.comp(StringComponent).string);
 	}
 }
