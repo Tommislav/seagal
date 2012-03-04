@@ -1,7 +1,10 @@
 package se.salomonsson.ent;
 
 /**
- * ...
+ * Entity Wrapper. Holds a reference to the actual entity (which is just a Int value)
+ * and to the EntityManager. Makes it possible to chain method calls in a more
+ * convenient way, such as:
+ * maganer.allocateEntity().addComponent(new CompA()).addComponent(new CompB());
  * @author Tommislav
  */
 
@@ -35,13 +38,21 @@ class EW
 	public function comp<T>(componentClass:Class<T>):T
 	{
 		var comp = _manager.getComponentOnEntity(_entity, componentClass);
-		//if null, create and register
+		
+		//if null, create, register and return new instance
+		if (comp == null)
+		{
+			var newComp = Type.createEmptyInstance(componentClass);
+			addComponent(cast newComp);
+			return newComp;
+		}
+		
 		return comp;
 	}
 	
 	public function all():Array<IComponent>
 	{
-		return new Array<IComponent>(); // TODO
+		return _manager.getAllComponents(_entity);
 	}
 	
 	public function getEntity():Int { return _entity; }

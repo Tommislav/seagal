@@ -2,10 +2,14 @@ package se.salomonsson.test;
 import haxe.unit.TestCase;
 import se.salomonsson.ent.EntManager;
 import se.salomonsson.ent.EW;
+import se.salomonsson.test.comp.NumericComponent;
 import se.salomonsson.test.comp.StringComponent;
 
 /**
- * ...
+ * Tests on the Entity Manager and Entity Wrapper class.
+ * Test the functionality of adding, removing and retrieving components from a
+ * entity. Feel free to change the implementation of the EntityManager and EW-class
+ * as long as all these test passes =)
  * @author Tommislav
  */
 
@@ -39,4 +43,63 @@ class EntityManagerTest extends TestCase
 		assertEquals("ett", e1.comp(StringComponent).string);
 		assertEquals("två", e2.comp(StringComponent).string);
 	}
+	
+	public function testGetAllComponents()
+	{
+		var manager:EntManager = new EntManager();
+		var e:EW = manager.allocateEntity().addComponent(new StringComponent("text")).addComponent(new NumericComponent(1));
+		var all = e.all();
+		assertEquals(2, all.length);
+	}
+	
+	public function testCreateNonExistantComponent()
+	{
+		var manager:EntManager = new EntManager();
+		var e:EW = manager.allocateEntity();
+		
+		// set value on non created component
+		e.comp(StringComponent).string = "abc";
+		
+		// new component should be registred with the set value
+		assertEquals("abc", e.comp(StringComponent).string);
+	}
+	
+	public function testGetEntityFromSingleComponent()
+	{
+		var manager:EntManager = new EntManager();
+		manager.allocateEntity()
+			.addComponent(new StringComponent("ett"))
+			.addComponent(new NumericComponent(1));
+		
+		manager.allocateEntity()
+			.addComponent(new StringComponent("två"));
+		
+		manager.allocateEntity()
+			.addComponent(new NumericComponent(3));
+		
+		manager.allocateEntity()
+			.addComponent(new NumericComponent(4));
+		
+		assertEquals(2, manager.getEWC([StringComponent]).length);
+		assertEquals("ett", manager.getEWC([StringComponent])[0].comp(StringComponent).string);
+		assertEquals("två", manager.getEWC([StringComponent])[1].comp(StringComponent).string);
+		assertEquals(3, manager.getEWC([NumericComponent]).length);
+	}
+	
+	public function testGetEntityFromMultipleComponents()
+	{
+		var manager:EntManager = new EntManager();
+		manager.allocateEntity()
+			.addComponent(new StringComponent("ett"))
+			.addComponent(new NumericComponent(1));
+		
+		manager.allocateEntity()
+			.addComponent(new StringComponent("två"));
+		
+		manager.allocateEntity()
+			.addComponent(new NumericComponent(3));
+		
+		assertEquals(1, manager.getEWC([StringComponent, NumericComponent]).length);
+	}
+	
 }

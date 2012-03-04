@@ -84,4 +84,31 @@ class EntManager
 		return null;
 	}
 	
+	public function getAllComponents(entity:Int):Array<IComponent>
+	{
+		var ent = _entityHash[entity];
+		return ent.copy();
+	}
+	
+	public function getEWC(compClasses:Array<Dynamic>):Array<EW>
+	{
+		var a:Array<EW> = new Array<EW>();
+		
+		for (i in 0..._entities.length)
+		{
+			var e:Int = _entities[i];
+			var match = true;
+			for (j in 0...compClasses.length)
+			{
+				if (getComponentOnEntity(e, cast compClasses[j]) == null)
+				{
+					match = false;
+					break;
+				}
+			}
+			if (match)
+				a.push(new EW().wrap(e, this));
+		}
+		return a;
+	}
 }
