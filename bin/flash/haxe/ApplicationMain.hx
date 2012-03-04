@@ -1,6 +1,6 @@
-import TestRunner
-	;
+import Main;
 import nme.Assets;
+import nme.events.Event;
 
 
 class ApplicationMain {
@@ -28,8 +28,7 @@ class ApplicationMain {
 		
 		
 		if (call_real)
-			TestRunner
-	.main();
+			Main.main();
 	}
 
 	static function onEnter (_) {
@@ -40,13 +39,9 @@ class ApplicationMain {
 		
 		if (loaded >= total) {
 			
-			mPreloader.onLoaded();
 			nme.Lib.current.removeEventListener(nme.events.Event.ENTER_FRAME, onEnter);
-			nme.Lib.current.removeChild(mPreloader);
-			mPreloader = null;
-			
-			TestRunner
-	.main ();
+			mPreloader.addEventListener (Event.COMPLETE, preloader_onComplete);
+			mPreloader.onLoaded();
 			
 		}
 		
@@ -132,6 +127,18 @@ class ApplicationMain {
 		
 		
 		return null;
+		
+	}
+	
+	
+	private static function preloader_onComplete (event:Event):Void {
+		
+		mPreloader.removeEventListener (Event.COMPLETE, preloader_onComplete);
+		
+		nme.Lib.current.removeChild(mPreloader);
+		mPreloader = null;
+		
+		Main.main ();
 		
 	}
 	

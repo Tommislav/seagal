@@ -1,13 +1,9 @@
 package;
 
-import haxe.unit.TestRunner;
-import nme.display.Bitmap;
 import nme.display.StageAlign;
 import nme.display.StageScaleMode;
 import nme.Lib;
-import se.salomonsson.entTest.TestEnt;
 import se.salomonsson.iso.IsoGame;
-import se.salomonsson.test.DummyTest;
 
 /**
  * ...
@@ -25,8 +21,6 @@ class Main
 		// entry point
 		
 		var instance = new IsoGame(stage);
-		
-		var entTest = new TestEnt(stage);
 	}
 	
 }

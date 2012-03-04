@@ -2,6 +2,7 @@ package se.salomonsson.iso;
 import nme.display.Bitmap;
 import nme.display.BitmapData;
 import nme.display.DisplayObjectContainer;
+import nme.events.Event;
 import nme.events.TimerEvent;
 import nme.geom.Point;
 import nme.geom.Rectangle;
@@ -71,6 +72,7 @@ class IsoGame
 		
 		_renderer2 = new IsoRenderer();
 		_renderer2.init( _map, canvas2 );
+		
 		
 		var timer:Timer = new Timer(20, 0);
 		timer.addEventListener(TimerEvent.TIMER, tick );

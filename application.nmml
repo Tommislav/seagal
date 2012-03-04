@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	<!-- metadata, make sure 'package' is at least 2 segments (ie. com.myproject) -->
-	<app file="LD23Engine" title="LD23_Engine" main="TestRunner
-	" package="se.salomonsson.ld23" 
+	<app file="LD23Engine" title="LD23_Engine" main="Main" package="se.salomonsson.ld23" 
 		version="1.0.0" company="Tommislav" />
 		
 	<!-- output -->
