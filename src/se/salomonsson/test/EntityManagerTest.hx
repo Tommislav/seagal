@@ -37,11 +37,11 @@ class EntityManagerTest extends TestCase
 	public function testGetComponentFromEntity()
 	{
 		var manager:EntManager = new EntManager();
-		var e1 = manager.allocateEntity().addComponent(new StringComponent("ett"));
-		var e2 = manager.allocateEntity().addComponent(new StringComponent("två"));
+		var ew1 = manager.allocateEntity().addComponent(new StringComponent("ett"));
+		var ew2 = manager.allocateEntity().addComponent(new StringComponent("två"));
 		
-		assertEquals("ett", e1.comp(StringComponent).string);
-		assertEquals("två", e2.comp(StringComponent).string);
+		assertEquals("ett", ew1.comp(StringComponent).string);
+		assertEquals("två", ew2.comp(StringComponent).string);
 	}
 	
 	public function testGetAllComponents()
@@ -100,6 +100,39 @@ class EntityManagerTest extends TestCase
 			.addComponent(new NumericComponent(3));
 		
 		assertEquals(1, manager.getEWC([StringComponent, NumericComponent]).length);
+	}
+	
+	public function testDestroyEntity()
+	{
+		var manager:EntManager = new EntManager();
+		var entity:EW = manager.allocateEntity().addComponent(new StringComponent("test"));
+		var intEnt:Int = entity.getEntity();
+		entity.destroy();
+		
+		assertEquals(0, manager.getEWC([StringComponent]).length);
+		assertEquals(0, manager.getAllComponents(intEnt).length);
+	}
+	
+	public function testRemoveComponentThroughManager()
+	{
+		var manager 		= new EntManager();
+		var stringComponent = new StringComponent("ett");
+		var numComponent 	= new NumericComponent(1);
+		var ew 				= manager.allocateEntity().addComponent(stringComponent).addComponent(numComponent);
+		
+		manager.removeComponentFrom( stringComponent, ew.getEntity() );
+		assertEquals(1, ew.all().length);
+	}
+	
+	public function testRemoveComponentThroughEW()
+	{
+		var manager 		= new EntManager();
+		var stringComponent = new StringComponent("ett");
+		var numComponent 	= new NumericComponent(1);
+		var ew 				= manager.allocateEntity().addComponent(stringComponent).addComponent(numComponent);
+		
+		ew.removeComponent(stringComponent);
+		assertEquals(1, ew.all().length);
 	}
 	
 }

@@ -39,7 +39,11 @@ class EntManager
 	
 	public function destroyEntity(entity:Int):Void
 	{
-		
+		if (_entities.remove(entity))
+		{
+			_entityHash[entity] = null;
+		}
+		_disposedEntities.push(entity);
 	}
 	
 	public function addComponentOn(component:IComponent, entity:Int):Void
@@ -49,7 +53,7 @@ class EntManager
 	
 	public function removeComponentFrom(component:IComponent, entity:Int):Void
 	{
-		
+		_entityHash[entity].remove(component);
 	}
 	
 	
@@ -76,6 +80,10 @@ class EntManager
 	public function getComponentOnEntity<T>(entity:Int, componentClass:Class<T>):T
 	{
 		var ent = _entityHash[entity];
+		
+		if (ent == null)
+			return null;
+		
 		for (i in 0...ent.length)
 		{
 			if (Std.is(ent[i], componentClass))
@@ -87,7 +95,7 @@ class EntManager
 	public function getAllComponents(entity:Int):Array<IComponent>
 	{
 		var ent = _entityHash[entity];
-		return ent.copy();
+		return (ent == null) ? new Array<IComponent>() : ent.copy();
 	}
 	
 	public function getEWC(compClasses:Array<Dynamic>):Array<EW>

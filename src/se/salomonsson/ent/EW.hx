@@ -19,6 +19,12 @@ class EW
 	private var _entity:Int;
 	private var _manager:EntManager;
 	
+	/**
+	 * Initiates the connectcion between the entityManager and the entity.
+	 * @param	entity
+	 * @param	manager
+	 * @return this instance
+	 */
 	public function wrap(entity:Int, manager:EntManager):EW
 	{
 		_entity = entity;
@@ -26,9 +32,27 @@ class EW
 		return this;
 	}
 	
+	/**
+	 * Will call the entity manager and register the component on the entity
+	 * associated with this wrapper. Will return an instance of itself so you
+	 * can chain several addComponent()-calls together on one line.
+	 * @param	component	The component to be registred
+	 * @return	reference of itself
+	 */
 	public function addComponent(component:IComponent):EW
 	{
 		_manager.addComponentOn(component, _entity);
+		return this;
+	}
+	
+	/**
+	 * Will remove the linkage between the component instance to this entity
+	 * @param	component	The instance of the component to be removed
+	 * @return	reference to itself
+	 */
+	public function removeComponent(component:IComponent):EW
+	{
+		_manager.removeComponentFrom(component, _entity);
 		return this;
 	}
 	
@@ -50,9 +74,22 @@ class EW
 		return comp;
 	}
 	
+	/**
+	 * Will return an array of all components registred to this entity
+	 */
 	public function all():Array<IComponent>
 	{
 		return _manager.getAllComponents(_entity);
+	}
+	
+	/**
+	 * Will unregister all components to this entity and delete the entity from the
+	 * entity manager.
+	 */
+	public function destroy():Void
+	{
+		_manager.destroyEntity(_entity);
+		//_manager = null;
 	}
 	
 	public function getEntity():Int { return _entity; }
