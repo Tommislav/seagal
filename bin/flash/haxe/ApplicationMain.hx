@@ -1,4 +1,4 @@
-import Main;
+import TestRunner;
 import nme.Assets;
 import nme.events.Event;
 
@@ -28,7 +28,7 @@ class ApplicationMain {
 		
 		
 		if (call_real)
-			Main.main();
+			TestRunner.main();
 	}
 
 	static function onEnter (_) {
@@ -138,7 +138,7 @@ class ApplicationMain {
 		nme.Lib.current.removeChild(mPreloader);
 		mPreloader = null;
 		
-		Main.main ();
+		TestRunner.main ();
 		
 	}
 	

@@ -119,4 +119,31 @@ class EntManager
 		}
 		return a;
 	}
+	
+	/**
+	 * Assumes that only one component of this type exists in the entire manager.
+	 * If more than one would exist, only the first occurance would be returned.
+	 */
+	public function getComp<T>(componentClass:Class<T>):T
+	{
+		// TODO: OptIMiZE!!
+		for (i in 0..._entities.length)
+		{
+			var c = getComponentOnEntity(_entities[i], componentClass);
+			if (c != null)
+				return c;
+		}
+		return null;
+	}
+	
+	
+	public function destroy() {
+		var entityClone = _entities.slice(0, -1);
+		for (i in 0...entityClone.length)
+		{
+			destroyEntity(entityClone[i]);
+		}
+		_disposedEntities = new Array<Int>();
+		
+	}
 }
