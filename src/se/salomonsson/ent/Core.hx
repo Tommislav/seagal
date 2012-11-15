@@ -6,49 +6,46 @@ import se.salomonsson.ent.SysManager;
  * @author Tommislav
  */
 
-class Core 
-{
+class Core {
 	private var _sm:SysManager;
 	private var _em:EntManager;
 
-	public function new() 
-	{
+	public function new() {
 		_em = new EntManager();
-		setSystemManager( new SysManager("::default") );
+		setSystemManager(new SysManager("::default"));
 	}
-	
+
 	public function tick() {
 		_sm.tick();
 	}
-	
-	public function setSystemManager(sm:SysManager):Void
-	{
+
+	public function setSystemManager(sm:SysManager):Void {
 		_sm = sm;
 		_sm.setEntManager(_em);
 	}
-	
-	public function getSystemManager():SysManager
-	{
+
+	public function getSystemManager():SysManager {
 		return _sm;
 	}
-	
-	public function getEntManager():EntManager
-	{
+
+	public function getEntManager():EntManager {
 		return _em;
 	}
-	
-	public function addSystem(sys:Sys, prio:Int)
-	{
+
+	/**
+	* Default priority?
+	**/
+
+	public function addSystem(sys:Sys, prio:Int) {
 		_sm.addSystem(sys, prio);
+		return sys;
 	}
-	
-	public function removeSystem(sys:Sys)
-	{
+
+	public function removeSystem(sys:Sys) {
 		_sm.removeSystem(sys);
 	}
-	
-	public function destroy()
-	{
+
+	public function destroy() {
 		_sm.destroy();
 		_em.destroy();
 		_sm = null;

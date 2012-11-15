@@ -73,7 +73,9 @@ class SysManager
 			var s:Array<Sys> = _sysHash[prio];
 			for (i in 0...s.length)
 			{
-				s[i].tick(null);
+				if (s[i].getIsRunning()) {
+					s[i].tick(null);
+				}
 			}
 		}
 	}

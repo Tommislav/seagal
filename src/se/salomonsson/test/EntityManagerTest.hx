@@ -29,9 +29,9 @@ class EntityManagerTest extends TestCase
 		var manager:EntManager = new EntManager();
 		manager.allocateEntity().addComponent(new StringComponent("test"));
 		
-		var comps:Array<StringComponent> = manager.getComponents(StringComponent);
-		assertEquals(1, comps.length);
-		assertEquals("test", comps[0].string);
+		var components:Array<StringComponent> = manager.getComponents(StringComponent);
+		assertEquals(1, components.length);
+		assertEquals("test", components[0].string);
 	}
 	
 	public function testGetSingleComponent()
