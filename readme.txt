@@ -42,5 +42,11 @@ manager.getEWC([VelocityComponent,PositionComponent]);
 
 
 Soon to come...
+ - destroy all entities from a given component
+ - dispatch events through all systems
+ - global "singletons" components
+
+
+
 
 Systems.
