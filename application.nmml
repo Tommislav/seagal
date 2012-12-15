@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
 	<!-- metadata, make sure 'package' is at least 2 segments (ie. com.myproject) -->
-	<app file="seagal" title="seagal" main="TestRunner" package="se.salomonsson.seagal" 
+	<app file="seagal" title="seagal" main="Main" package="se.salomonsson.seagal" 
 		version="1.0.0" company="Tommislav" path="bin" />
 		
 	<!-- output -->
-	<window width="820" height="480" fps="60" background="0xFFFFFF" orientation="landscape" resizable="true" />
+	<window width="820" height="480" fps="30" background="0xFFFFFF" orientation="landscape" resizable="true" />
 	<!--<set name="BUILD_DIR" value="bin" />-->
 	
 	<!-- classpath, haxe libs -->

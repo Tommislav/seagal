@@ -41,4 +41,28 @@ class PixelMapParserTest extends TestCase
 		
 		return r + "," + g + "," + b;
 	}
+	
+	
+	public function testWriteOverrideValues():Void {
+		var pixMap:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/pixelmap_test.gif"));
+		assertEquals("0x112233", pixMap.getHex(0, 1));
+		
+		pixMap.setOverrideValueAtCoord(0, 1, 0x001122);
+		assertEquals("0x001122", pixMap.getHex(0, 1));
+		
+		pixMap.clearOverrideValueAt(0, 1);
+		assertEquals("0x112233", pixMap.getHex(0, 1));
+	}
+	
+	public function testClearAllOverrideValues():Void {
+		var pixMap:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/pixelmap_test.gif"));
+		
+		pixMap.setOverrideValueAtCoord(0, 1, 0x123456);
+		pixMap.setOverrideValueAtCoord(2, 0, 0x123456);
+		
+		pixMap.clearAllOverrideValues();
+		
+		assertEquals("0x112233", 		pixMap.getHex(0, 1));
+		assertEquals("0xFF0000",		pixMap.getHex(2, 0));
+	}
 }

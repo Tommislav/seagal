@@ -20,7 +20,8 @@ class Main
 		stage.align = StageAlign.TOP_LEFT;
 		// entry point
 		
-		var instance = new IsoGame(stage);
+		//var instance = new IsoGame(stage);
+		var instance = new Test2dGame(stage);
 	}
 	
 }

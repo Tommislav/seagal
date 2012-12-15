@@ -1,4 +1,4 @@
-import TestRunner;
+import Main;
 import nme.Assets;
 import nme.events.Event;
 
@@ -15,6 +15,9 @@ class ApplicationMain {
 		var loaded:Int = nme.Lib.current.loaderInfo.bytesLoaded;
 		var total:Int = nme.Lib.current.loaderInfo.bytesTotal;
 		
+		nme.Lib.current.stage.align = nme.display.StageAlign.TOP_LEFT;
+		nme.Lib.current.stage.scaleMode = nme.display.StageScaleMode.NO_SCALE;
+		
 		if (loaded < total || true) /* Always wait for event */ {
 			
 			call_real = false;
@@ -27,8 +30,47 @@ class ApplicationMain {
 		}
 		
 		
+		
+		haxe.Log.trace = flashTrace; // null
+		
+
 		if (call_real)
-			TestRunner.main();
+			begin ();
+	}
+
+	
+	private static function flashTrace( v : Dynamic, ?pos : haxe.PosInfos ) {
+		var className = pos.className.substr(pos.className.lastIndexOf('.') + 1);
+		var message = className+"::"+pos.methodName+":"+pos.lineNumber+": " + v;
+
+        if (flash.external.ExternalInterface.available)
+			flash.external.ExternalInterface.call("console.log", message);
+		else untyped flash.Boot.__trace(v, pos);
+    }
+	
+	
+	private static function begin () {
+		
+		var hasMain = false;
+		
+		for (methodName in Type.getClassFields(Main))
+		{
+			if (methodName == "main")
+			{
+				hasMain = true;
+				break;
+			}
+		}
+		
+		if (hasMain)
+		{
+			Reflect.callMethod (Main, Reflect.field (Main, "main"), []);
+		}
+		else
+		{
+			nme.Lib.current.addChild(cast (Type.createInstance(Main, []), nme.display.DisplayObject));	
+		}
+		
 	}
 
 	static function onEnter (_) {
@@ -125,6 +167,26 @@ class ApplicationMain {
             return Assets.getBitmapData ("assets/floor_white_32x32.png");
          
 		
+		if (inName=="assets/Image1.png")
+			 
+            return Assets.getBitmapData ("assets/Image1.png");
+         
+		
+		if (inName=="assets/map.bmp")
+			 
+            return Assets.getBytes ("assets/map.bmp");
+         
+		
+		if (inName=="assets/map.gif")
+			 
+            return Assets.getBitmapData ("assets/map.gif");
+         
+		
+		if (inName=="assets/pixelmap_test.gif")
+			 
+            return Assets.getBitmapData ("assets/pixelmap_test.gif");
+         
+		
 		
 		return null;
 		
@@ -138,70 +200,30 @@ class ApplicationMain {
 		nme.Lib.current.removeChild(mPreloader);
 		mPreloader = null;
 		
-		TestRunner.main ();
+		begin ();
 		
 	}
 	
 }
 
 
+class NME_assets_block_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_block_red_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_block_solidbottom_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_block_transparent_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_block_white_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_block_white_transparent_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_red_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_red_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_red_32x32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_shade_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_shade_32x32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_transparent_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_white_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_white_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_floor_white_32x32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_image1_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_map_bmp extends nme.utils.ByteArray { }
+class NME_assets_map_gif extends nme.display.BitmapData { public function new () { super (0, 0); } }
+class NME_assets_pixelmap_test_gif extends nme.display.BitmapData { public function new () { super (0, 0); } }
 
-	
-		class NME_assets_block_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_block_red_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_block_solidbottom_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_block_transparent_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_block_white_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_block_white_transparent_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_red_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_red_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_red_32x32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_shade_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_shade_32x32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_transparent_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_white_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_white_32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	
-
-	
-		class NME_assets_floor_white_32x32_png extends nme.display.BitmapData { public function new () { super (0, 0); } }
-	

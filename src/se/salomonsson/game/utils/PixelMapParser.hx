@@ -14,6 +14,7 @@ class PixelMapParser
 	public var size(getSize, null):Int;
 	
 	private var _map:BitmapData;
+	private var _originalMap:BitmapData;
 	private var _width:Int;
 	private var _height:Int;
 	private var _size:Int;
@@ -22,14 +23,17 @@ class PixelMapParser
 	
 	public function new(bd:BitmapData) {
 		setMap(bd);
+		_hexArr = new Array<String>();
 		_hexArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
 	}
 	
 	public function setMap(map:BitmapData):Void {
-		_map = map;
+		_map = map.clone();
 		_width = _map.width;
 		_height = _map.height;
 		_size = _width * _height;
+		
+		_originalMap = _map.clone();
 	}
 	
 	
@@ -48,6 +52,19 @@ class PixelMapParser
 	
 	public function atCoord(x:Int, y:Int):Int {
 		return _map.getPixel(x, y);
+	}
+	
+	public function setOverrideValueAtCoord(x:Int, y:Int, value:Int):Void {
+		_map.setPixel(x, y, value);
+	}
+	
+	public function clearOverrideValueAt(x:Int, y:Int):Void {
+		var originalColor:Int = _originalMap.getPixel(x, y);
+		_map.setPixel(x, y, originalColor);
+	}
+	
+	public function clearAllOverrideValues():Void {
+		_map = _originalMap.clone();
 	}
 	
 	

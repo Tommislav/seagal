@@ -58,6 +58,14 @@ class Assets {
 			resourceTypes.set ("assets/floor_white_32.png", "image");
 			resourceClasses.set ("assets/floor_white_32x32.png", NME_assets_floor_white_32x32_png);
 			resourceTypes.set ("assets/floor_white_32x32.png", "image");
+			resourceClasses.set ("assets/Image1.png", NME_assets_image1_png);
+			resourceTypes.set ("assets/Image1.png", "image");
+			resourceClasses.set ("assets/map.bmp", NME_assets_map_bmp);
+			resourceTypes.set ("assets/map.bmp", "binary");
+			resourceClasses.set ("assets/map.gif", NME_assets_map_gif);
+			resourceTypes.set ("assets/map.gif", "image");
+			resourceClasses.set ("assets/pixelmap_test.gif", NME_assets_pixelmap_test_gif);
+			resourceTypes.set ("assets/pixelmap_test.gif", "image");
 			
 			initialized = true;
 			
@@ -107,11 +115,11 @@ class Assets {
 		
 		if (resourceClasses.exists (id)) {
 			
-			return cast (Type.createInstance (resourceClasses.get (id), []), ByteArray);
+			return Type.createInstance (resourceClasses.get (id), []);
 			
 		} else {
 			
-			trace ("[nme.Assets] There is no String or ByteArray asset with an ID of \"" + id + "\"");
+			trace ("[nme.Assets] There is no ByteArray asset with an ID of \"" + id + "\"");
 			
 			return null;
 			
