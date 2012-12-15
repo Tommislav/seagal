@@ -13,6 +13,7 @@ class TileModelComponent implements IComponent
 	
 	public var tileSheets:Array<BitmapData>;
 	
+	
 	public static function build(sheets:Array<BitmapData>):TileModelComponent {
 		var tm = new TileModelComponent();
 		tm.tileSheets = sheets;

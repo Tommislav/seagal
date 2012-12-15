@@ -14,7 +14,7 @@ class Sys {
 		_running = true;
 	}
 
-	public function onAdded(sm, em) {
+	public function onAdded(sm, em):Void {
 		_sm = sm;
 		_em = em;
 	}
