@@ -1,4 +1,6 @@
 package se.salomonsson.ent;
+import nme.events.Event;
+import nme.events.EventDispatcher;
 
 
 /**
@@ -14,11 +16,14 @@ class EntManager
 	private var _entities:Array<Int>;
 	private var _entityHash:Array<Array<IComponent>>;
 	
+	// This really needs to be looked over!
+	private var _eventDispatcher:EventDispatcher;
 	
 	public function new() 
 	{
 		_entities = new Array<Int>();
 		_entityHash = new Array<Array<IComponent>>();
+		_eventDispatcher = new EventDispatcher();
 	}
 	
 	public function allocateEntity():EW
@@ -41,6 +46,7 @@ class EntManager
 	{
 		if (_entities.remove(entity))
 		{
+			dispatch(new EntityEvent(EntityEvent.ENTITY_DESTROYED, entity, this));
 			_entityHash[entity] = null;
 		}
 		_disposedEntities.push(entity);
@@ -48,6 +54,9 @@ class EntManager
 	
 	public function addComponentOn(component:IComponent, entity:Int):Void
 	{
+		if (_entityHash[entity] == null)
+			return;
+		
 		_entityHash[entity].push(component);
 	}
 	
@@ -145,5 +154,21 @@ class EntManager
 		}
 		_disposedEntities = new Array<Int>();
 		
+	}
+	
+	
+	
+	
+	
+	public function dispatch(e:Event) {
+		_eventDispatcher.dispatchEvent(e);
+	}
+	
+	public function addListener(type, listener) {
+		_eventDispatcher.addEventListener(type, listener);
+	}
+	
+	public function removeListener(type, listener) {
+		_eventDispatcher.removeEventListener(type, listener);
 	}
 }

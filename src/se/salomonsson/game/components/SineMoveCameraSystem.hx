@@ -29,17 +29,17 @@ class SineMoveCameraSystem extends Sys
 		super.onAdded(sm, em);
 		_camera = em.getComp(CameraComponent);
 		
-		_w = 1500;
-		_h = 1500;
+		_w = 250;
+		_h = 250;
 		_cntX = 0;
 		_cntY = 0;
 	}
 	
 	override public function tick(gt:GameTime):Void 
 	{
-		_cntX += 0.02;
+		_cntX += 0.05;
 		_cntY += 0.01;
-		_camera.x = 1000 + Std.int(Math.sin(_cntX) * _w);
-		_camera.y = 1000 + Std.int(Math.cos(_cntY) * _h);
+		_camera.x = 250 + Std.int(Math.sin(_cntX) * _w);
+		_camera.y = 250 + Std.int(Math.cos(_cntY) * _h);
 	}
 }

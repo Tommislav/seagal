@@ -1,4 +1,5 @@
 package se.salomonsson.ent;
+import nme.events.EventDispatcher;
 
 /**
  * ...
@@ -11,6 +12,7 @@ class SysManager
 	private var _systemPriorities:Array<Int>;
 	private var _sysHash:Array<Array<Sys>>;
 	private var _em:EntManager;
+	private var _dispatcher:EventDispatcher;
 	
 	
 	public function getId() { return _id; }
@@ -19,6 +21,7 @@ class SysManager
 		_id = id;
 		_systemPriorities = new Array<Int>();
 		_sysHash = new Array<Array<Sys>>();
+		_dispatcher = new EventDispatcher();
 	}
 	
 	public function setEntManager(em)
@@ -79,6 +82,8 @@ class SysManager
 			}
 		}
 	}
+	
+	public function getEventDispatcher():EventDispatcher { return _dispatcher; }
 	
 	public function destroy() {}
 }

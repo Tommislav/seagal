@@ -30,7 +30,7 @@ class RenderViewPortSystem extends Sys
 	private var _p:Point;
 	private var _r:Rectangle;
 	
-	public function new(viewportId:String) 
+	public function new(viewportId:String, sheet:BitmapData) 
 	{
 		super();
 		_layerId = "main";
@@ -38,7 +38,7 @@ class RenderViewPortSystem extends Sys
 		_p = new Point();
 		_r = new Rectangle(0,0,64,64);
 		
-		_sheet = Assets.getBitmapData("assets/Image1.png");
+		_sheet = sheet;
 	}
 	
 	
@@ -50,22 +50,23 @@ class RenderViewPortSystem extends Sys
 		if (_viewport == null)
 			_viewport = em().getEWC([ViewPortComponent])[0];
 			
-		if (_debug == null)
-			_debug = em().getComp(DebugComponent);
+		//if (_debug == null)
+			//_debug = em().getComp(DebugComponent);
 		
 		var canvas:BitmapData = _viewport.comp(CanvasComponent).canvas;
 		var camera:CameraComponent = _viewport.comp(CameraComponent);
-		canvas.fillRect(new Rectangle(0, 0, 640, 480), 0xccaa33);
+		canvas.fillRect(canvas.rect, 0xcccccc);
+		
+		var camX:Float = camera.x * _layer.scrollX;
+		var camY:Float = camera.y * _layer.scrollY;
 		
 		var w:Int = Math.ceil(camera.width / 64) + 1;
 		var h:Int = Math.ceil(camera.height / 64) + 1;
-		var tileX:Int = Math.floor(camera.x / 64);
-		var tileY:Int = Math.floor(camera.y / 64);
+		var tileX:Int = Math.floor(camX / 64);
+		var tileY:Int = Math.floor(camY / 64);
 		
-		var offX:Int = aboveZero(camera.x % 64, 64);	
-		var offY:Int = aboveZero(camera.y % 64, 64);
-		
-		_debug.debugText = "tileX, tileY: " + tileX + "," + tileY + " : offX/offY: " + offX + "/" + offY;
+		var offX = aboveZero(camX % 64, 64);
+		var offY = aboveZero(camY % 64, 64);
 		
 		for (y in 0...h) {
 			for (x in 0...w) {
@@ -87,7 +88,7 @@ class RenderViewPortSystem extends Sys
 	}
 	
 	
-	private function aboveZero(val:Int, range:Int):Int {
+	private function aboveZero(val:Float, range:Float):Float {
 		if (val < 0)
 			val += range;
 		return val;

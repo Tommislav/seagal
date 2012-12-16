@@ -32,6 +32,7 @@ class DebugCameraPositionSystem extends Sys
 		_camera = em.getComp(CameraComponent);
 		
 		_tf = new TextField();
+		_tf.x = 250;
 		_tf.autoSize = TextFieldAutoSize.LEFT;
 		_tf.background = true;
 		_holder.addChild(_tf);
@@ -40,8 +41,7 @@ class DebugCameraPositionSystem extends Sys
 	
 	override public function tick(gt:GameTime):Void 
 	{
-		var debug = em().getComp(DebugComponent);
-		var str:String = "Camera x=" + _camera.x + ", y=" + _camera.y + "\n" + debug.debugText;
+		var str:String = "Camera x=" + Std.int(_camera.x) + ", y=" + Std.int(_camera.y) + "\n";
 		_tf.text = str;
 	}
 }

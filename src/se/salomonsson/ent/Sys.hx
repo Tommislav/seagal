@@ -1,4 +1,5 @@
 package se.salomonsson.ent;
+import nme.events.Event;
 
 /**
  * ...
@@ -19,13 +20,26 @@ class Sys {
 		_em = em;
 	}
 
-	public function onRemoved() { _sm = null; }
+	public function onRemoved():Void { _sm = null; }
 	public function getManager() { return _sm; }
 	public function em():EntManager { return _em; } // change to getter method
 
 	public function pause() {_running = false;}
 	public function resume() {_running = true;}
 	public function getIsRunning() {return _running;}
+	
+	public function dispatch(e:Event) {
+		_sm.getEventDispatcher().dispatchEvent(e);
+	}
+	
+	public function addListener(type, listener) {
+		_sm.getEventDispatcher().addEventListener(type, listener);
+	}
+	
+	public function removeListener(type, listener) {
+		_sm.getEventDispatcher().removeEventListener(type, listener);
+	}
+	
 	
 	public function tick(gt:GameTime):Void {}
 }

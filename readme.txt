@@ -51,4 +51,8 @@ Soon to come...
 
 
 
-Systems.
+TODOS:
+- We should access componets the same way, not getComp() and comp()
+- dispatch events when creating or destroying entities
+
+
