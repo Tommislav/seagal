@@ -1,8 +1,12 @@
-#########################################
-Seagal, Kick Ass Entity Framework in HaXe
-#########################################
+####################################################################
+Seagal
+- Cross Platform Entity Framework for game development in HaXe
+####################################################################
 
-Udate to my comments. Not all that satisfied with that short syntax thing. Better to write out what it actually means. But kind of good since I have such a crappy keyboard on my laptop =)
+Version 0.2, migrate from NME ot OpenFL
+
+
+Update to my comments. Not all that satisfied with that short syntax thing. Better to write out what it actually means. But kind of good since I have such a crappy keyboard on my laptop =)
 
 I'm trying to keep the syntax short, so I'm not always writing the full method names. Like "getEWC" instead of "getEntityWithComponents".
 I'm also using a wrapper around each entity to be able to more easily create and work
