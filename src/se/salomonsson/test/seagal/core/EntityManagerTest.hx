@@ -1,9 +1,9 @@
-package se.salomonsson.test;
+package se.salomonsson.test.seagal.core;
 import haxe.unit.TestCase;
-import se.salomonsson.ent.EntManager;
-import se.salomonsson.ent.EW;
-import se.salomonsson.test.comp.NumericComponent;
-import se.salomonsson.test.comp.StringComponent;
+import se.salomonsson.seagal.core.EntManager;
+import se.salomonsson.seagal.core.EW;
+import se.salomonsson.test.seagal.core.comp.NumericComponent;
+import se.salomonsson.test.seagal.core.comp.StringComponent;
 
 /**
  * Tests on the Entity Manager and Entity Wrapper class.

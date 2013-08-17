@@ -1,5 +1,5 @@
-package se.salomonsson.ent;
-import se.salomonsson.ent.SysManager;
+package se.salomonsson.seagal.core;
+import se.salomonsson.seagal.core.SysManager;
 
 /**
  * ...

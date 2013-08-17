@@ -1,8 +1,8 @@
-package se.salomonsson.test;
+package se.salomonsson.test.seagal.core;
 import haxe.unit.TestCase;
-import se.salomonsson.ent.Core;
-import se.salomonsson.ent.EntManager;
-import se.salomonsson.ent.SysManager;
+import se.salomonsson.seagal.core.Core;
+import se.salomonsson.seagal.core.EntManager;
+import se.salomonsson.seagal.core.SysManager;
 
 /**
  * ...

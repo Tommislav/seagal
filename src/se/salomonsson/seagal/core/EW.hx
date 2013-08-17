@@ -1,4 +1,4 @@
-package se.salomonsson.ent;
+package se.salomonsson.seagal.core;
 
 /**
  * Entity Wrapper. Holds a reference to the actual entity (which is just a Int value)

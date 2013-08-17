@@ -1,6 +1,6 @@
-package se.salomonsson.test.sys;
-import se.salomonsson.ent.GameTime;
-import se.salomonsson.ent.Sys;
+package se.salomonsson.test.seagal.core.sys;
+import se.salomonsson.seagal.core.GameTime;
+import se.salomonsson.seagal.core.Sys;
 
 /**
  * ...

@@ -1,4 +1,4 @@
-package se.salomonsson.test.utils;
+package se.salomonsson.test.game.utils;
 import haxe.unit.TestCase;
 import openfl.Assets;
 import se.salomonsson.game.utils.PixelMapParser;

@@ -4,7 +4,7 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Stage;
 import flash.events.Event;
-import se.salomonsson.ent.Core;
+import se.salomonsson.seagal.core.Core;
 import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.CanvasComponent;
 import se.salomonsson.game.components.DebugComponent;

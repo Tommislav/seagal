@@ -1,5 +1,5 @@
-package se.salomonsson.test.comp;
-import se.salomonsson.ent.IComponent;
+package se.salomonsson.test.seagal.core.comp;
+import se.salomonsson.seagal.core.IComponent;
 
 /**
  * Testcomponent holding a integer value

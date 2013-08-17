@@ -1,4 +1,4 @@
-package se.salomonsson.ent;
+package se.salomonsson.seagal.core;
 
 /**
  * ...

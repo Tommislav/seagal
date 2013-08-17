@@ -1,7 +1,7 @@
-package se.salomonsson.test.sys;
-import se.salomonsson.ent.GameTime;
-import se.salomonsson.ent.Sys;
-import se.salomonsson.test.comp.StringComponent;
+package se.salomonsson.test.seagal.core.sys;
+import se.salomonsson.seagal.core.GameTime;
+import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.test.seagal.core.comp.StringComponent;
 
 /**
  * Requires that one entity has a StringComponent. Adds its predifined string to that components string-property

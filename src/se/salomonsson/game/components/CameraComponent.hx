@@ -1,6 +1,6 @@
 package se.salomonsson.game.components;
 //import game.components.CenterPointPositionComponent;
-import se.salomonsson.ent.IComponent;
+import se.salomonsson.seagal.core.IComponent;
 
 /**
  * ...

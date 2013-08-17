@@ -1,6 +1,6 @@
 package se.salomonsson.game.components;
 import flash.display.BitmapData;
-import se.salomonsson.ent.IComponent;
+import se.salomonsson.seagal.core.IComponent;
 
 /**
  * ...

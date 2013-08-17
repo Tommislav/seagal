@@ -1,7 +1,7 @@
 package se.salomonsson.game.components;
 import flash.display.Stage;
-import se.salomonsson.ent.GameTime;
-import se.salomonsson.ent.Sys;
+import se.salomonsson.seagal.core.GameTime;
+import se.salomonsson.seagal.core.Sys;
 
 /**
  * ...
