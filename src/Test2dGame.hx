@@ -4,6 +4,7 @@ import flash.display.Bitmap;
 import flash.display.BitmapData;
 import flash.display.Stage;
 import flash.events.Event;
+import se.salomonsson.game.systems.MoveCameraWithKeyboardSystem;
 import se.salomonsson.seagal.core.Core;
 import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.CanvasComponent;
@@ -50,8 +51,8 @@ class Test2dGame
 		_core.getEntManager().allocateEntity().addComponent(new DebugComponent()); // remove in release build
 		
 		_core.addSystem(new KeyboardInputSystem(), 1);
-		//_core.addSystem(new MoveCameraWithKeyboardSystem(), 2);
-		_core.addSystem(new SineMoveCameraSystem("camera"), 2);
+		_core.addSystem(new MoveCameraWithKeyboardSystem(), 2);
+		//_core.addSystem(new SineMoveCameraSystem("camera"), 2);
 		_core.addSystem(new RenderViewPortSystem("main", canvas), 3);
 		_core.addSystem(new DebugCameraPositionSystem(_stage),4);
 		

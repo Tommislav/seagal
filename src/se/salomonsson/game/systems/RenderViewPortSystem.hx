@@ -49,9 +49,6 @@ class RenderViewPortSystem extends Sys
 		
 		if (_viewport == null)
 			_viewport = em().getEWC([ViewPortComponent])[0];
-			
-		//if (_debug == null)
-			//_debug = em().getComp(DebugComponent);
 		
 		var canvas:BitmapData = _viewport.comp(CanvasComponent).canvas;
 		var camera:CameraComponent = _viewport.comp(CameraComponent);

@@ -2,7 +2,7 @@ package se.salomonsson.seagal.core;
 import flash.events.Event;
 
 /**
- * ...
+ * Base class for a System
  * @author Tommislav
  */
 

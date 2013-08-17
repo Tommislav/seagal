@@ -1,16 +1,14 @@
 package se.salomonsson.seagal.core;
 
 /**
- * ...
+ * Use as interface for concrete GameTime classes (with setters for the data)
  * @author Tommislav
  */
 
-class GameTime 
+class GameTime
 {
-
-	public function new() 
-	{
-		
-	}
+	var tick(get, null):Int;
+	public function get_tick():Int { return 0; }
 	
+	public function new() {}
 }

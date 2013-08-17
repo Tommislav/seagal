@@ -10,27 +10,21 @@ package se.salomonsson.seagal.core;
 
 class EW 
 {
-
-	public function new() 
-	{
-		
-	}
-	
 	private var _entity:Int;
 	private var _manager:EntManager;
 	
 	/**
-	 * Initiates the connectcion between the entityManager and the entity.
+	 * Initiates a new EntityWrapper with the connectcion between the entityManager and the entity.
 	 * @param	entity
 	 * @param	manager
-	 * @return this instance
 	 */
-	public function wrap(entity:Int, manager:EntManager):EW
+	public function new(entity:Int, manager:EntManager) 
 	{
 		_entity = entity;
 		_manager = manager;
-		return this;
 	}
+	
+	
 	
 	/**
 	 * Will call the entity manager and register the component on the entity

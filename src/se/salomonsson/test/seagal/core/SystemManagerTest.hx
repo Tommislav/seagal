@@ -1,6 +1,7 @@
 package se.salomonsson.test.seagal.core;
 import haxe.unit.TestCase;
 import se.salomonsson.seagal.core.Core;
+import se.salomonsson.seagal.core.GameTime;
 import se.salomonsson.seagal.core.Sys;
 import se.salomonsson.seagal.core.SysManager;
 import se.salomonsson.test.seagal.core.comp.StringComponent;

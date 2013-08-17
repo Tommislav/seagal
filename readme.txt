@@ -1,6 +1,14 @@
 ####################################################################
-Seagal
-- Cross Platform Entity Framework for game development in HaXe
+
+/ ___|| ____|  / \  / ___|  / \  | |    
+\___ \|  _|   / _ \| |  _  / _ \ | |    
+ ___) | |___ / ___ | |_| |/ ___ \| |___ 
+|____/|_____/_/   \_\____/_/   \_|_____|
+
+SEAGAL
+Cross Platform Entity Framework for game development in HaXe
+Written by Tommislav (www.salomonsson.se | www.pixeltruss.com)
+
 ####################################################################
 
 Version 0.2, migrate from NME ot OpenFL
@@ -58,5 +66,8 @@ Soon to come...
 TODOS:
 - We should access componets the same way, not getComp() and comp()
 - dispatch events when creating or destroying entities
+
+- Sys.em() -> sys.entManager (getter)
+
 
 

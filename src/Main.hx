@@ -3,6 +3,8 @@ package;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.Lib;
+import pgr.gconsole.GameConsole;
+import pgr.gconsole.GCThemes;
 import se.salomonsson.iso.IsoGame;
 
 /**
@@ -19,15 +21,12 @@ class Main
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.align = StageAlign.TOP_LEFT;
 		
-		trace("trace number 1");
-		#if debug
-			trace("trace if debug");
-		#end
-		
 		#if unittest
 			var instance = new TestRunner();
 		#else
 			var instance = new Test2dGame(stage);
 		#end
+		
+		GameConsole.toFront();
 	}
 }

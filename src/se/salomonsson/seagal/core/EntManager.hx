@@ -39,7 +39,7 @@ class EntManager
 		_entities.push(entity);
 		_entityHash[entity] = new Array<IComponent>();
 		
-		return new EW().wrap(entity, this);
+		return new EW(entity, this);
 	}
 	
 	public function destroyEntity(entity:Int):Void
@@ -54,8 +54,12 @@ class EntManager
 	
 	public function addComponentOn(component:IComponent, entity:Int):Void
 	{
-		if (_entityHash[entity] == null)
+		if (_entityHash[entity] == null) {
+			#if debug
+				throw "No such entity exists";
+			#end
 			return;
+		}
 		
 		_entityHash[entity].push(component);
 	}
@@ -134,7 +138,7 @@ class EntManager
 				}
 			}
 			if (match)
-				a.push(new EW().wrap(e, this));
+				a.push(new EW(e, this));
 		}
 		return a;
 	}

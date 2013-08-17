@@ -69,7 +69,7 @@ class SysManager
 		}
 	}
 	
-	public function tick()
+	public function tick(gt:GameTime)
 	{
 		for (prioIndex in 0..._systemPriorities.length)
 		{
@@ -81,7 +81,7 @@ class SysManager
 			for (i in 0...s.length)
 			{
 				if (s[i].getIsRunning()) {
-					s[i].tick(null);
+					s[i].tick(gt);
 				}
 			}
 		}
