@@ -1,5 +1,5 @@
 package se.salomonsson.game.components;
-import nme.display.BitmapData;
+import flash.display.BitmapData;
 
 /**
  * ...

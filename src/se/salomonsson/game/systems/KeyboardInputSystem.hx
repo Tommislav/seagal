@@ -1,9 +1,9 @@
 package se.salomonsson.game.systems;
 
-import nme.display.Stage;
-import nme.events.Event;
-import nme.events.KeyboardEvent;
-import nme.Lib;
+import flash.display.Stage;
+import flash.events.Event;
+import flash.events.KeyboardEvent;
+import flash.Lib;
 import se.salomonsson.ent.EW;
 import se.salomonsson.ent.Sys;
 import se.salomonsson.game.components.KeyboardInputComponent;

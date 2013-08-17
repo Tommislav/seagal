@@ -1,5 +1,5 @@
 package se.salomonsson.game.utils;
-import nme.display.BitmapData;
+import flash.display.BitmapData;
 
 /**
  * saves a 2d bitmap and uses the color values as data
@@ -9,9 +9,9 @@ import nme.display.BitmapData;
 class PixelMapParser 
 {
 
-	public var width (getWidth, null):Int;
-	public var height(getHeight, null):Int;
-	public var size(getSize, null):Int;
+	public var width (get, null):Int;
+	public var height(get, null):Int;
+	public var size(get, null):Int;
 	
 	private var _map:BitmapData;
 	private var _originalMap:BitmapData;
@@ -37,15 +37,15 @@ class PixelMapParser
 	}
 	
 	
-	private function getWidth():Int {
+	private function get_width():Int {
 		return _width;
 	}
 	
-	private function getHeight():Int {
+	private function get_height():Int {
 		return _height;
 	}
 	
-	private function getSize():Int {
+	private function get_size():Int {
 		return _size;
 	}
 	

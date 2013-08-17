@@ -1,7 +1,7 @@
 package se.salomonsson.game.systems;
-import nme.display.DisplayObjectContainer;
-import nme.text.TextField;
-import nme.text.TextFieldAutoSize;
+import flash.display.DisplayObjectContainer;
+import flash.text.TextField;
+import flash.text.TextFieldAutoSize;
 import se.salomonsson.ent.GameTime;
 import se.salomonsson.ent.Sys;
 import se.salomonsson.game.components.CameraComponent;

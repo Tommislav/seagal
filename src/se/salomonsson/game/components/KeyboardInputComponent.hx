@@ -9,15 +9,15 @@ import se.salomonsson.ent.IComponent;
 class KeyboardInputComponent implements IComponent
 {
 
-	public var keysDown:Array<UInt>;
+	public var keysDown:Array<Int>;
 	
 	public function new()
 	{
-		keysDown = new Array<UInt>();
+		keysDown = new Array<Int>();
 	}
 	
 	// this is not really allowed... =/
-	public function getKeyIsDown(key:UInt):Bool {
+	public function getKeyIsDown(key:Int):Bool {
 		for (i in 0...keysDown.length)
 			if (keysDown[i] == key)
 				return true;

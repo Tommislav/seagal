@@ -1,5 +1,5 @@
 package se.salomonsson.iso;
-import nme.display.BitmapData;
+import flash.display.BitmapData;
 
 /**
  * ...

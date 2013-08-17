@@ -7,11 +7,16 @@
 		version="1.0.0" 
 		company="Salomonsson.se | Pixeltruss.com" />
 	
-	<app 
+	<!--app 
 		main="TestRunner" 
 		path="Export" 
-		file="SeagalUnittests" />
+		file="SeagalUnittests" /-->
 	
+	<app 
+		main="Main" 
+		path="Export" 
+		file="TestGame" />
+		
 	<source path="src" />
 	
 	

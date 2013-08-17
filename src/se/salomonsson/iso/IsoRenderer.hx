@@ -1,7 +1,8 @@
 package se.salomonsson.iso;
-import nme.display.BitmapData;
-import nme.geom.Point;
-import nme.geom.Rectangle;
+import flash.display.BitmapData;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+import openfl.Assets;
 
 /**
  * ...
@@ -36,7 +37,6 @@ class IsoRenderer implements IRenderer
 		
 	}
 	
-	/* INTERFACE se.salomonsson.ld23.IRenderer */
 	
 	public function init(map:Array<Array<Int>>, canvas:BitmapData):Void 
 	{
@@ -55,10 +55,11 @@ class IsoRenderer implements IRenderer
 		_p = new Point();
 		_r = new Rectangle(0, 0, _gfxW, _gfxH);
 		
-		_floor0 = ApplicationMain.getAsset("assets/floor_white_32.png");
-		_floor1 = ApplicationMain.getAsset("assets/floor_shade_32.png");
-		_floor2 = ApplicationMain.getAsset("assets/floor_red_32.png");
-		var block:BitmapData = ApplicationMain.getAsset("assets/block_solidBottom_32.png");
+		
+		_floor0 = Assets.getBitmapData("assets/floor_white_32.png");
+		_floor1 = Assets.getBitmapData("assets/floor_shade_32.png");
+		_floor2 = Assets.getBitmapData("assets/floor_red_32.png");
+		var block:BitmapData = Assets.getBitmapData("assets/block_solidBottom_32.png");
 		_tiles = [_floor0, _floor1, _floor2, block];
 	}
 	

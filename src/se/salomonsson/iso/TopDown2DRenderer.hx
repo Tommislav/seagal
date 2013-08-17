@@ -1,7 +1,8 @@
 package se.salomonsson.iso;
-import nme.display.BitmapData;
-import nme.geom.Point;
-import nme.geom.Rectangle;
+import flash.display.BitmapData;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+import openfl.Assets;
 
 /**
  * ...
@@ -38,9 +39,9 @@ class TopDown2DRenderer implements IRenderer
 		_canvas = canvas;
 		_canvasRect = new Rectangle(0, 0, _canvas.width, _canvas.height);
 		
-		_floor0 = ApplicationMain.getAsset("assets/floor_white_32x32.png");
-		_floor1 = ApplicationMain.getAsset("assets/floor_shade_32x32.png");
-		_floor2 = ApplicationMain.getAsset("assets/floor_red_32x32.png");
+		_floor0 = Assets.getBitmapData("assets/floor_white_32x32.png");
+		_floor1 = Assets.getBitmapData("assets/floor_shade_32x32.png");
+		_floor2 = Assets.getBitmapData("assets/floor_red_32x32.png");
 		
 		_tiles = [_floor0, _floor1, _floor2, _floor2];
 		

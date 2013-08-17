@@ -1,6 +1,6 @@
 package se.salomonsson.test.utils;
 import haxe.unit.TestCase;
-import nme.Assets;
+import openfl.Assets;
 import se.salomonsson.game.utils.PixelMapParser;
 
 /**

@@ -1,5 +1,5 @@
 package se.salomonsson.game.components;
-import nme.display.Stage;
+import flash.display.Stage;
 import se.salomonsson.ent.GameTime;
 import se.salomonsson.ent.Sys;
 

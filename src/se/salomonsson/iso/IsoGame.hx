@@ -1,12 +1,12 @@
 package se.salomonsson.iso;
-import nme.display.Bitmap;
-import nme.display.BitmapData;
-import nme.display.DisplayObjectContainer;
-import nme.events.Event;
-import nme.events.TimerEvent;
-import nme.geom.Point;
-import nme.geom.Rectangle;
-import nme.utils.Timer;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.DisplayObjectContainer;
+import flash.events.Event;
+import flash.events.TimerEvent;
+import flash.geom.Point;
+import flash.geom.Rectangle;
+import flash.utils.Timer;
 
 /**
  * ...

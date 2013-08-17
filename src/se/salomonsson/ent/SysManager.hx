@@ -1,5 +1,5 @@
 package se.salomonsson.ent;
-import nme.events.EventDispatcher;
+import flash.events.EventDispatcher;
 
 /**
  * ...

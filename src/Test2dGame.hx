@@ -1,9 +1,9 @@
 package ;
-import nme.Assets;
-import nme.display.Bitmap;
-import nme.display.BitmapData;
-import nme.display.Stage;
-import nme.events.Event;
+import openfl.Assets;
+import flash.display.Bitmap;
+import flash.display.BitmapData;
+import flash.display.Stage;
+import flash.events.Event;
 import se.salomonsson.ent.Core;
 import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.CanvasComponent;
@@ -14,7 +14,6 @@ import se.salomonsson.game.components.TileModelComponent;
 import se.salomonsson.game.components.ViewPortComponent;
 import se.salomonsson.game.systems.DebugCameraPositionSystem;
 import se.salomonsson.game.systems.KeyboardInputSystem;
-import se.salomonsson.game.systems.MoveCameraWithKeyboardSystem;
 import se.salomonsson.game.systems.RenderViewPortSystem;
 import se.salomonsson.game.utils.PixelMapParser;
 
@@ -36,7 +35,7 @@ class Test2dGame
 		var map:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/map.gif"));
 		var tiles:BitmapData = Assets.getBitmapData("assets/Image1.png");
 		
-		var canvas:Bitmap = buildCanvas(640, 480);
+		var canvas:BitmapData = buildCanvas(640, 480);
 		
 		_core.getEntManager().allocateEntity()
 			.addComponent(new ViewPortComponent("main"))
@@ -53,7 +52,7 @@ class Test2dGame
 		_core.addSystem(new KeyboardInputSystem(), 1);
 		//_core.addSystem(new MoveCameraWithKeyboardSystem(), 2);
 		_core.addSystem(new SineMoveCameraSystem("camera"), 2);
-		_core.addSystem(new RenderViewPortSystem("main", canvas.), 3);
+		_core.addSystem(new RenderViewPortSystem("main", canvas), 3);
 		_core.addSystem(new DebugCameraPositionSystem(_stage),4);
 		
 		

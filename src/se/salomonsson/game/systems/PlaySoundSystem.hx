@@ -1,5 +1,5 @@
 package se.salomonsson.game.systems;
-import nme.Assets;
+import openfl.Assets;
 import se.salomonsson.ent.GameTime;
 import se.salomonsson.ent.Sys;
 import se.salomonsson.game.components.SoundComponent;

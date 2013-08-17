@@ -1,8 +1,8 @@
 package se.salomonsson.game.systems;
-import nme.Assets;
-import nme.display.BitmapData;
-import nme.geom.Point;
-import nme.geom.Rectangle;
+import openfl.Assets;
+import flash.display.BitmapData;
+import flash.geom.Point;
+import flash.geom.Rectangle;
 import se.salomonsson.ent.EW;
 import se.salomonsson.ent.GameTime;
 import se.salomonsson.ent.Sys;
