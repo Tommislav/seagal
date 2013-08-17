@@ -74,6 +74,11 @@ class EW
 		return comp;
 	}
 	
+	public function hasComponent(compClass:Dynamic):Bool {
+		return _manager.hasComponent(_entity, compClass);
+	}
+	
+	
 	/**
 	 * Will return an array of all components registred to this entity
 	 */
@@ -91,6 +96,7 @@ class EW
 		_manager.destroyEntity(_entity);
 		//_manager = null;
 	}
+	
 	
 	public function getEntity():Int { return _entity; }
 	public function getManager():EntManager { return _manager; }

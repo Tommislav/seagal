@@ -13,7 +13,7 @@ class SysManager
 	private var _sysHash:Array<Array<Sys>>;
 	private var _em:EntManager;
 	private var _dispatcher:EventDispatcher;
-	
+	private var _running:Bool;
 	
 	public function getId() { return _id; }
 	public function new(id:String) 
@@ -22,6 +22,7 @@ class SysManager
 		_systemPriorities = new Array<Int>();
 		_sysHash = new Array<Array<Sys>>();
 		_dispatcher = new EventDispatcher();
+		_running = true;
 	}
 	
 	public function setEntManager(em)
@@ -72,6 +73,9 @@ class SysManager
 	{
 		for (prioIndex in 0..._systemPriorities.length)
 		{
+			if (!_running)
+				return;
+			
 			var prio = _systemPriorities[prioIndex];
 			var s:Array<Sys> = _sysHash[prio];
 			for (i in 0...s.length)
@@ -81,6 +85,14 @@ class SysManager
 				}
 			}
 		}
+	}
+	
+	public function pause() {
+		_running = false;
+	}
+	
+	public function resume() {
+		_running = true;
 	}
 	
 	public function getEventDispatcher():EventDispatcher { return _dispatcher; }

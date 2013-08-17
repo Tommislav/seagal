@@ -36,11 +36,13 @@ class Test2dGame
 		var map:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/map.gif"));
 		var tiles:BitmapData = Assets.getBitmapData("assets/Image1.png");
 		
+		var canvas:Bitmap = buildCanvas(640, 480);
+		
 		_core.getEntManager().allocateEntity()
 			.addComponent(new ViewPortComponent("main"))
 			.addComponent(new CameraComponent("camera"))
 			.addComponent(TileModelComponent.build([tiles]))
-			.addComponent(CanvasComponent.build(buildCanvas(640,480)));
+			.addComponent(CanvasComponent.build(canvas));
 		
 		_core.getEntManager().allocateEntity()
 			.addComponent(TileLayerComponent.build("main", 10, map));
@@ -51,7 +53,7 @@ class Test2dGame
 		_core.addSystem(new KeyboardInputSystem(), 1);
 		//_core.addSystem(new MoveCameraWithKeyboardSystem(), 2);
 		_core.addSystem(new SineMoveCameraSystem("camera"), 2);
-		_core.addSystem(new RenderViewPortSystem("main"), 3);
+		_core.addSystem(new RenderViewPortSystem("main", canvas.), 3);
 		_core.addSystem(new DebugCameraPositionSystem(_stage),4);
 		
 		

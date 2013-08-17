@@ -1,5 +1,5 @@
 package se.salomonsson.game.components;
-import game.components.CenterPointPositionComponent;
+//import game.components.CenterPointPositionComponent;
 import se.salomonsson.ent.IComponent;
 
 /**
@@ -35,6 +35,7 @@ class CameraComponent implements IComponent
 	}
 	
 	// You shouldn't place logic in component... =/
+	/*
 	public function inView(pos:CenterPointPositionComponent):Bool {
 		var posLeft = pos.x - pos.radius;
 		var posRight = pos.x + pos.radius;
@@ -47,5 +48,5 @@ class CameraComponent implements IComponent
 			}
 		}
 		return false;
-	}
+	}*/
 }

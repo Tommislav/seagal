@@ -66,6 +66,15 @@ class EntManager
 	}
 	
 	
+	public function hasComponent(entity:Int, compClass:Dynamic):Bool {
+		var entHash = _entityHash[entity];
+		for (i in 0...entHash.length) {
+			if (Std.is(entHash[i], compClass))
+				return true;
+		}
+		return false;
+	}
+	
 	
 	public function getComponents<T>(componentClass:Class<T>):Array<T>
 	{
@@ -106,6 +115,7 @@ class EntManager
 		var ent = _entityHash[entity];
 		return (ent == null) ? new Array<IComponent>() : ent.copy();
 	}
+	
 	
 	public function getEWC(compClasses:Array<Dynamic>):Array<EW>
 	{
