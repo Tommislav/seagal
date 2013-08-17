@@ -24,7 +24,7 @@
     <option flashStrict="False" />
     <option mainClass="Main" />
     <option enabledebug="True" />
-    <option additional="" />
+    <option additional="unittest" />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

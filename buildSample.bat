@@ -1,0 +1,1 @@
+openfl project.xml test flash -debug -Dfdb

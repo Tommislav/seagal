@@ -18,10 +18,16 @@ class Main
 		var stage = Lib.current.stage;
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.align = StageAlign.TOP_LEFT;
-		// entry point
 		
-		//var instance = new IsoGame(stage);
-		var instance = new Test2dGame(stage);
+		trace("trace number 1");
+		#if debug
+			trace("trace if debug");
+		#end
+		
+		#if unittest
+			var instance = new TestRunner();
+		#else
+			var instance = new Test2dGame(stage);
+		#end
 	}
-	
 }

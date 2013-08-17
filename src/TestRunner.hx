@@ -13,7 +13,7 @@ class TestRunner
 {
 
 	
-	public static function main() 
+	public function new() 
 	{
 		var runner:haxe.unit.TestRunner = new haxe.unit.TestRunner();
 		runner.add( new EntityManagerTest() );
