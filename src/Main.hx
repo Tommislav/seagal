@@ -21,11 +21,11 @@ class Main
 		stage.scaleMode = StageScaleMode.NO_SCALE;
 		stage.align = StageAlign.TOP_LEFT;
 		
-		#if unittest
+		//#if unittest
 			var instance = new TestRunner();
-		#else
-			var instance = new Test2dGame(stage);
-		#end
+		//#else
+			//var instance = new Test2dGame(stage);
+		//#end
 		
 		GameConsole.toFront();
 	}
