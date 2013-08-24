@@ -25,8 +25,9 @@ class Main
 			var instance = new TestRunner();
 		//#else
 			//var instance = new Test2dGame(stage);
+			//GameConsole.toFront();
 		//#end
 		
-		GameConsole.toFront();
+		
 	}
 }

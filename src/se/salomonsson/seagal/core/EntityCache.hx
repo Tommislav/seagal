@@ -33,9 +33,9 @@ class EntityCache
 		return _entityCache[componentHash];
 	}
 	
-	public function markComponentDirty(dirtyComponent:Class)
+	public function markComponentDirty(dirtyComponent:Dynamic)
 	{
-		var partOfComponentHash = hashifyComponents[dirtyComponent];
+		var partOfComponentHash = hashifyComponents([dirtyComponent]);
 		for (fullHash in _entityCache.keys()) {
 			if (fullHash.indexOf(partOfComponentHash) > -1) {
 				_entityCache[fullHash] = null; // clear this hash, the component is part of this lookup
