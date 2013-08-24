@@ -71,6 +71,12 @@ class EntityCacheTest extends TestCase
 		// Cache is now invalid because StringComponent has more/fewer entities
 		assertFalse(_cache.hasCache([NumericComponent, StringComponent]));
 	}
+	
+	public function testMarkComponentDirtyFromInstance() {
+		_cache.putCache(_entityListOne, [NumericComponent, StringComponent]);
+		_cache.markComponentDirty(new StringComponent(""));
+		assertFalse(_cache.hasCache([NumericComponent, StringComponent]));
+	}
 }
 
 

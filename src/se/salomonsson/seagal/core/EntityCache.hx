@@ -33,14 +33,27 @@ class EntityCache
 		return _entityCache[componentHash];
 	}
 	
+	// IComponent or Class of IComponent type works...
 	public function markComponentDirty(dirtyComponent:Dynamic)
 	{
-		var partOfComponentHash = hashifyComponents([dirtyComponent]);
-		for (fullHash in _entityCache.keys()) {
-			if (fullHash.indexOf(partOfComponentHash) > -1) {
-				_entityCache[fullHash] = null; // clear this hash, the component is part of this lookup
-			}
+		
+		if (Std.is(dirtyComponent, IComponent)) {
+			markComponentDirtyWithCompClass(Type.getClass(dirtyComponent));
+		} else if (Std.is(dirtyComponent, Class)) {
+			markComponentDirtyWithCompClass(dirtyComponent);
+		} else {
+			throw "Can only invalidate component of type IComponent or Class - " + Type.getClassName(dirtyComponent); 
 		}
+	}
+	
+	private function markComponentDirtyWithCompClass(dirtyComp:Dynamic)
+	{
+		var partOfComponentHash = hashifyComponents([dirtyComp]);
+			for (fullHash in _entityCache.keys()) {
+				if (fullHash.indexOf(partOfComponentHash) > -1) {
+					_entityCache[fullHash] = null; // clear this hash, the component is part of this lookup
+				}
+			}
 	}
 	
 	public function clearCache()
