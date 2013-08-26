@@ -3,9 +3,6 @@ package;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.Lib;
-import pgr.gconsole.GameConsole;
-import pgr.gconsole.GCThemes;
-import se.salomonsson.iso.IsoGame;
 
 /**
  * ...

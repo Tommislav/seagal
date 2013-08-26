@@ -1,7 +1,7 @@
 package se.salomonsson.seagal.core;
-import pgr.gconsole.GameConsole;
-import pgr.gconsole.GCThemes;
+import flash.events.Event;
 import se.salomonsson.seagal.core.SysManager;
+import se.salomonsson.seagal.debug.SLogger;
 
 /**
  * One core consists of a default SystemManager and a default EntityManager
@@ -15,10 +15,7 @@ class Core {
 
 	public function new() {
 		
-		#if debug
-			GameConsole.init(0.5, "DOWN", GCThemes.GREEN_THEME);
-			GameConsole.log("Seagal Enitity System...");
-		#end
+		SLogger.init();
 		
 		_em = new EntManager();
 		setSystemManager(new SysManager("::default"));
@@ -57,6 +54,10 @@ class Core {
 		_sm.removeSystem(sys);
 	}
 
+	public function dispatch(e:Event) {
+		_sm.getEventDispatcher().dispatchEvent(e);
+	}
+	
 	public function destroy() {
 		_sm.destroy();
 		_em.destroy();
