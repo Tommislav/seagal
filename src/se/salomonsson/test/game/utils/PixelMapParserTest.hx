@@ -1,4 +1,5 @@
 package se.salomonsson.test.game.utils;
+import flash.display.BitmapData;
 import haxe.unit.TestCase;
 import openfl.Assets;
 import se.salomonsson.game.utils.PixelMapParser;
@@ -13,9 +14,9 @@ class PixelMapParserTest extends TestCase
 
 	public function testPixelMapParser()
 	{
-		var pixMap:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/pixelmap_test.gif"));
+		var pixMap:PixelMapParser = new PixelMapParser(getTestBitmapData());
 		var size:String = "Size " + pixMap.width + "x" + pixMap.height + ": " + pixMap.size;
-		assertEquals(size, "Size 3x2: 6");
+		assertEquals("Size 3x2: 6", 	size);
 		
 		assertEquals("0,0,0", 			colToHex(pixMap.atCoord(0, 0)));
 		assertEquals("255,255,255", 	colToHex(pixMap.atCoord(1, 0)));
@@ -44,7 +45,7 @@ class PixelMapParserTest extends TestCase
 	
 	
 	public function testWriteOverrideValues():Void {
-		var pixMap:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/pixelmap_test.gif"));
+		var pixMap:PixelMapParser = new PixelMapParser(getTestBitmapData());
 		assertEquals("0x112233", pixMap.getHex(0, 1));
 		
 		pixMap.setOverrideValueAtCoord(0, 1, 0x001122);
@@ -55,7 +56,7 @@ class PixelMapParserTest extends TestCase
 	}
 	
 	public function testClearAllOverrideValues():Void {
-		var pixMap:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/pixelmap_test.gif"));
+		var pixMap:PixelMapParser = new PixelMapParser(getTestBitmapData());
 		
 		pixMap.setOverrideValueAtCoord(0, 1, 0x123456);
 		pixMap.setOverrideValueAtCoord(2, 0, 0x123456);
@@ -64,5 +65,22 @@ class PixelMapParserTest extends TestCase
 		
 		assertEquals("0x112233", 		pixMap.getHex(0, 1));
 		assertEquals("0xFF0000",		pixMap.getHex(2, 0));
+	}
+	
+	
+	
+	private function getTestBitmapData() {
+		var bd:BitmapData = new BitmapData(3, 2, false, 0xffffff);
+		var colors = [
+			[0x000000, 0xffffff, 0xff0000],
+			[0x112233, 0x0000ff, 0x00ff00]
+		];
+		
+		for (y in 0...colors.length) {
+			for (x in 0...colors[y].length) {
+				bd.setPixel(x, y, colors[y][x] );
+			}
+		}
+		return bd;
 	}
 }

@@ -10,7 +10,7 @@ class StringComponent implements IComponent
 {
 	public var string:String;
 	
-	public function new(string:String="") 
+	public function new(string:String) 
 	{
 		this.string = string;
 	}

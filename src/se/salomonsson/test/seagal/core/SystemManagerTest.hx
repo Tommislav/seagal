@@ -93,7 +93,7 @@ class SystemManagerTest extends TestCase {
 
 	public function testPauseSingleSystem() {
 		var core = new Core();
-		var comp = new StringComponent();
+		var comp = new StringComponent("");
 		
 		core.getEntManager().allocateEntity().addComponent(comp);
 		var s1 = core.addSystem(new WriteStringSystem("One"), 2);

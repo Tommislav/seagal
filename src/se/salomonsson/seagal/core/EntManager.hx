@@ -70,7 +70,7 @@ class EntManager
 	}
 	
 	
-	public function hasComponent(entity:Int, compClass:Dynamic):Bool {
+	public function hasComponent(entity:Int, compClass:Dynamic):Bool { // Remove dynamic?
 		var entHash = _entityHash[entity];
 		for (i in 0...entHash.length) {
 			if (Std.is(entHash[i], compClass))
@@ -79,26 +79,41 @@ class EntManager
 		return false;
 	}
 	
-	
+	/**
+	 * Get all arrays of a given type, no matter which Entity it belongs to.
+	 */
 	public function getComponents<T>(componentClass:Class<T>):Array<T>
 	{
 		var ret:Array<T> = new Array<T>();
+		
 		var len:Int = _entities.length;
+		
 		for (i in 0...len)
 		{
 			var e:Int = _entities[i];
-			var entHash = _entityHash[e];
+			var entHash:Array<IComponent> = _entityHash[e];
 			for (j in 0...entHash.length)
 			{
-				if (Std.is(entHash[j], componentClass))
-					ret.push(cast entHash[j]);
+				if (Std.is(entHash[j], componentClass)) {
+					#if cpp	
+						var comp = entHash[j];
+						ret.push( untyped __cpp__("comp->__GetRealObject()") );
+					#else
+						var comp = cast(entHash[j]);
+						(untyped ret).push(entHash[j]);
+					#end
+				}
 			}
 		}
 		
-		//throw new Error("Failed to find component of type " + Type.getClassName(componentClass));
 		return ret;
 	}
 	
+	/**
+	 * Get a component of a specific type back from a known Entity.
+	 * The component will be casted to the value you ask for, like
+	 * getComponentOnEntity(myEntity, PositionComponent).x = 3;
+	 */
 	public function getComponentOnEntity<T>(entity:Int, componentClass:Class<T>):T
 	{
 		var ent = _entityHash[entity];
@@ -120,7 +135,12 @@ class EntManager
 		return (ent == null) ? new Array<IComponent>() : ent.copy();
 	}
 	
-	
+	/**
+	 * get Entity With Components. Accepts an array of Component classes and will
+	 * return an array of all Entities that contains ALL of those Components
+	 * @param	compClasses
+	 * @return Array of EW (lightweight EntityWrappers)
+	 */
 	public function getEWC(compClasses:Array<Dynamic>):Array<EW>
 	{
 		var a:Array<EW> = new Array<EW>();

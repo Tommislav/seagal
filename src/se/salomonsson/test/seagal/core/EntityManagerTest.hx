@@ -29,10 +29,22 @@ class EntityManagerTest extends TestCase
 		var manager:EntManager = new EntManager();
 		manager.allocateEntity().addComponent(new StringComponent("test"));
 		
-		var components:Array<StringComponent> = manager.getComponents(StringComponent);
-		assertEquals(1, components.length);
-		assertEquals("test", components[0].string);
+		assertEquals("test", manager.getComponents(StringComponent)[0].string);
+		
+		var comps = manager.getComponents(StringComponent);
+		var comp:StringComponent = comps[0];
+		assertEquals(1, comps.length);
+		assertTrue(Std.is(comp, StringComponent));
+		
+		assertEquals("test", comp.string);
+		
+		var compFromEnt:StringComponent = manager.getComp(StringComponent);
+		assertEquals(compFromEnt, comp);
+		assertEquals(compFromEnt.string, comp.string);
+		assertEquals("test", compFromEnt.string);
+		
 	}
+	
 	
 	public function testGetSingleComponent()
 	{
@@ -110,6 +122,7 @@ class EntityManagerTest extends TestCase
 		assertEquals(1, manager.getEWC([StringComponent, NumericComponent]).length);
 	}
 	
+	
 	public function testDestroyEntity()
 	{
 		var manager:EntManager = new EntManager();
@@ -120,6 +133,7 @@ class EntityManagerTest extends TestCase
 		assertEquals(0, manager.getEWC([StringComponent]).length);
 		assertEquals(0, manager.getAllComponents(intEnt).length);
 	}
+	
 	
 	public function testRemoveComponentThroughManager()
 	{
@@ -142,5 +156,6 @@ class EntityManagerTest extends TestCase
 		ew.removeComponent(stringComponent);
 		assertEquals(1, ew.all().length);
 	}
+	
 	
 }
