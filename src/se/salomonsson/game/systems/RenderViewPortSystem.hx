@@ -48,7 +48,7 @@ class RenderViewPortSystem extends Sys
 			_layer = getLayerFromId(_layerId);
 		
 		if (_viewport == null)
-			_viewport = em().getEWC([ViewPortComponent])[0];
+			_viewport = em().getEntitiesWithComponents([ViewPortComponent])[0];
 		
 		var canvas:BitmapData = _viewport.comp(CanvasComponent).canvas;
 		var camera:CameraComponent = _viewport.comp(CameraComponent);

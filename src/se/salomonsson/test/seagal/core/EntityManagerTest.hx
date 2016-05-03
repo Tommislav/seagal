@@ -38,7 +38,7 @@ class EntityManagerTest extends TestCase
 		
 		assertEquals("test", comp.string);
 		
-		var compFromEnt:StringComponent = manager.getComp(StringComponent);
+		var compFromEnt:StringComponent = manager.getComponent(StringComponent);
 		assertEquals(compFromEnt, comp);
 		assertEquals(compFromEnt.string, comp.string);
 		assertEquals("test", compFromEnt.string);
@@ -50,7 +50,7 @@ class EntityManagerTest extends TestCase
 	{
 		var manager = new EntManager();
 		manager.allocateEntity().addComponent(new StringComponent("ett"));
-		assertEquals("ett", manager.getComp(StringComponent).string);
+		assertEquals("ett", manager.getComponent(StringComponent).string);
 		
 	}
 	
@@ -100,10 +100,10 @@ class EntityManagerTest extends TestCase
 		manager.allocateEntity()
 			.addComponent(new NumericComponent(4));
 		
-		assertEquals(2, manager.getEWC([StringComponent]).length);
-		assertEquals("ett", manager.getEWC([StringComponent])[0].comp(StringComponent).string);
-		assertEquals("två", manager.getEWC([StringComponent])[1].comp(StringComponent).string);
-		assertEquals(3, manager.getEWC([NumericComponent]).length);
+		assertEquals(2, manager.getEntitiesWithComponents([StringComponent]).length);
+		assertEquals("ett", manager.getEntitiesWithComponents([StringComponent])[0].comp(StringComponent).string);
+		assertEquals("två", manager.getEntitiesWithComponents([StringComponent])[1].comp(StringComponent).string);
+		assertEquals(3, manager.getEntitiesWithComponents([NumericComponent]).length);
 	}
 	
 	public function testGetEntityFromMultipleComponents()
@@ -119,7 +119,7 @@ class EntityManagerTest extends TestCase
 		manager.allocateEntity()
 			.addComponent(new NumericComponent(3));
 		
-		assertEquals(1, manager.getEWC([StringComponent, NumericComponent]).length);
+		assertEquals(1, manager.getEntitiesWithComponents([StringComponent, NumericComponent]).length);
 	}
 	
 	
@@ -130,7 +130,7 @@ class EntityManagerTest extends TestCase
 		var intEnt:Int = entity.getEntity();
 		entity.destroy();
 		
-		assertEquals(0, manager.getEWC([StringComponent]).length);
+		assertEquals(0, manager.getEntitiesWithComponents([StringComponent]).length);
 		assertEquals(0, manager.getAllComponents(intEnt).length);
 	}
 	

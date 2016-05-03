@@ -26,7 +26,7 @@ class PlaySoundSystem extends Sys
 	{
 		super.onRemoved();
 		_soundComponent = null;
-		em().destroyEntity(em().getEWC([SoundComponent])[0].getEntity());
+		em().destroyEntity(em().getEntitiesWithComponents([SoundComponent])[0].getEntity());
 	}
 	
 	override public function tick(gt:GameTime):Void 

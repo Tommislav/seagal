@@ -19,6 +19,6 @@ class WriteStringSystem extends Sys
 	
 	override public function tick(gt:GameTime):Void 
 	{
-		em().getComp(StringComponent).string += _str;
+		em().getComponent(StringComponent).string += _str;
 	}
 }

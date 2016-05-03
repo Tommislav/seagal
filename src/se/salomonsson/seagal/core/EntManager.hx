@@ -35,7 +35,7 @@ class EntManager
 		{
 			entity = _entityCounter++;
 		}
-		
+
 		_entities.push(entity);
 		_entityHash[entity] = new Array<IComponent>();
 		
@@ -141,7 +141,7 @@ class EntManager
 	 * @param	compClasses
 	 * @return Array of EW (lightweight EntityWrappers)
 	 */
-	public function getEWC(compClasses:Array<Dynamic>):Array<EW>
+	public function getEntitiesWithComponents(compClasses:Array<Dynamic>):Array<EW>
 	{
 		var a:Array<EW> = new Array<EW>();
 		
@@ -167,7 +167,7 @@ class EntManager
 	 * Assumes that only one component of this type exists in the entire manager.
 	 * If more than one would exist, only the first occurance would be returned.
 	 */
-	public function getComp<T>(componentClass:Class<T>):T
+	public function getComponent<T>(componentClass:Class<T>):T
 	{
 		// TODO: OptIMiZE!!
 		for (i in 0..._entities.length)

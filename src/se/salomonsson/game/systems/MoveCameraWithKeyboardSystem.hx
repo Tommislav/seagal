@@ -18,8 +18,8 @@ class MoveCameraWithKeyboardSystem extends Sys
 	override public function tick(gt:GameTime):Void 
 	{
 		var speed = 1;
-		var key:KeyboardInputComponent = em().getComp(KeyboardInputComponent);
-		var camera:CameraComponent = em().getComp(CameraComponent);
+		var key:KeyboardInputComponent = em().getComponent(KeyboardInputComponent);
+		var camera:CameraComponent = em().getComponent(CameraComponent);
 		
 		if (key.getKeyIsDown(Keyboard.LEFT))
 			camera.x -= speed;
