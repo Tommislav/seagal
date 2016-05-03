@@ -2,7 +2,7 @@ package se.salomonsson.test.seagal.core;
 import haxe.unit.TestCase;
 import se.salomonsson.seagal.core.Core;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.seagal.core.SystemManager;
 import se.salomonsson.test.seagal.core.comp.StringComponent;
 import se.salomonsson.test.seagal.core.sys.SimpleTestSystem;

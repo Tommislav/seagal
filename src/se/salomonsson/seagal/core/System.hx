@@ -6,7 +6,7 @@ import flash.events.Event;
  * @author Tommislav
  */
 
-class Sys {
+class System {
 	private var _sm:SystemManager;
 	private var _em:EntityManager;
 	private var _running:Bool;
@@ -23,6 +23,11 @@ class Sys {
 	public function onRemoved():Void { _sm = null; }
 	public function getManager() { return _sm; }
 	public function em():EntityManager { return _em; } // change to getter method
+
+	public var entityManager(get, null):EntityManager;
+	function get_entityManager() {
+		return _em;
+	}
 
 	public function pause() {_running = false;}
 	public function resume() {_running = true;}

@@ -1,14 +1,14 @@
 package se.salomonsson.game.components;
 import flash.display.Stage;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 
 /**
  * ...
  * @author Tommislav
  */
 
-class SineMoveCameraSystem extends Sys
+class SineMoveCameraSystem extends System
 {
 	private var _name:String;
 	private var _camera:CameraComponent;

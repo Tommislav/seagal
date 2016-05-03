@@ -1,7 +1,7 @@
 package se.salomonsson.game.systems;
 import openfl.Assets;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.game.components.SoundComponent;
 
 /**
@@ -9,7 +9,7 @@ import se.salomonsson.game.components.SoundComponent;
  * @author Tommislav
  */
 
-class PlaySoundSystem extends Sys
+class PlaySoundSystem extends System
 {
 
 	private var _soundComponent:SoundComponent;

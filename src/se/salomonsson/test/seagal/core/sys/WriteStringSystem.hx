@@ -1,6 +1,6 @@
 package se.salomonsson.test.seagal.core.sys;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.test.seagal.core.comp.StringComponent;
 
 /**
@@ -8,7 +8,7 @@ import se.salomonsson.test.seagal.core.comp.StringComponent;
  * @author Tommislav
  */
 
-class WriteStringSystem extends Sys
+class WriteStringSystem extends System
 {
 	private var _str:String;
 	public function new(str:String) 

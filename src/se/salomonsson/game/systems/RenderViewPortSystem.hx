@@ -5,7 +5,7 @@ import flash.geom.Point;
 import flash.geom.Rectangle;
 import se.salomonsson.seagal.core.EW;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.CanvasComponent;
 import se.salomonsson.game.components.DebugComponent;
@@ -17,7 +17,7 @@ import se.salomonsson.game.components.ViewPortComponent;
  * @author Tommislav
  */
 
-class RenderViewPortSystem extends Sys
+class RenderViewPortSystem extends System
 {
 	private var _viewport:EW;
 	private var _layerId:String;

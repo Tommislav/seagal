@@ -1,7 +1,7 @@
 package se.salomonsson.game.systems;
 import flash.ui.Keyboard;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.KeyboardInputComponent;
 
@@ -10,7 +10,7 @@ import se.salomonsson.game.components.KeyboardInputComponent;
  * @author Tommislav
  */
 
-class MoveCameraWithKeyboardSystem extends Sys
+class MoveCameraWithKeyboardSystem extends System
 {
 
 	public function new() { super(); }

@@ -3,7 +3,7 @@ import flash.display.DisplayObjectContainer;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.game.components.CameraComponent;
 
 /**
@@ -11,7 +11,7 @@ import se.salomonsson.game.components.CameraComponent;
  * @author Tommislav
  */
 
-class DebugCameraPositionSystem extends Sys
+class DebugCameraPositionSystem extends System
 {
 	private var _holder:DisplayObjectContainer;
 	private var _tf:TextField;

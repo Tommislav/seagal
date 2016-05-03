@@ -44,12 +44,12 @@ class Core {
 	* Default priority?
 	**/
 
-	public function addSystem(sys:Sys, prio:Int) {
+	public function addSystem(sys:System, prio:Int) {
 		_sm.addSystem(sys, prio);
 		return sys;
 	}
 
-	public function removeSystem(sys:Sys) {
+	public function removeSystem(sys:System) {
 		_sm.removeSystem(sys);
 	}
 

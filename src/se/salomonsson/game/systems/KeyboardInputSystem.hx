@@ -5,7 +5,7 @@ import flash.events.Event;
 import flash.events.KeyboardEvent;
 import flash.Lib;
 import se.salomonsson.seagal.core.EW;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 import se.salomonsson.game.components.KeyboardInputComponent;
 
 /**
@@ -13,7 +13,7 @@ import se.salomonsson.game.components.KeyboardInputComponent;
  * @author Tommislav
  */
 
-class KeyboardInputSystem extends Sys
+class KeyboardInputSystem extends System
 {
 
 	private var _stage:Stage;

@@ -1,13 +1,13 @@
 package se.salomonsson.test.seagal.core.sys;
 import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.Sys;
+import se.salomonsson.seagal.core.System;
 
 /**
  * ...
  * @author Tommislav
  */
 
-class SimpleTestSystem extends Sys
+class SimpleTestSystem extends System
 {
 	public var tickCount:Int;
 	
