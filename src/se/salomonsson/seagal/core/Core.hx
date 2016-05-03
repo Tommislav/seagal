@@ -1,6 +1,6 @@
 package se.salomonsson.seagal.core;
 import flash.events.Event;
-import se.salomonsson.seagal.core.SysManager;
+import se.salomonsson.seagal.core.SystemManager;
 import se.salomonsson.seagal.debug.SLogger;
 
 /**
@@ -9,7 +9,7 @@ import se.salomonsson.seagal.debug.SLogger;
  */
 
 class Core {
-	private var _sm:SysManager;
+	private var _sm:SystemManager;
 	private var _em:EntityManager;
 	private var _time:GameTimeImpl;
 
@@ -18,7 +18,7 @@ class Core {
 		SLogger.init();
 		
 		_em = new EntityManager();
-		setSystemManager(new SysManager("::default"));
+		setSystemManager(new SystemManager("::default"));
 		_time = new GameTimeImpl();
 	}
 
@@ -28,12 +28,12 @@ class Core {
 		_sm.tick(_time);
 	}
 
-	public function setSystemManager(sm:SysManager):Void {
+	public function setSystemManager(sm:SystemManager):Void {
 		_sm = sm;
-		_sm.setEntManager(_em);
+		_sm.setEntityManager(_em);
 	}
 
-	public function getSystemManager():SysManager {
+	public function getSystemManager():SystemManager {
 		return _sm;
 	}
 

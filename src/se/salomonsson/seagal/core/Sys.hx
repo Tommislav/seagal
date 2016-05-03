@@ -7,7 +7,7 @@ import flash.events.Event;
  */
 
 class Sys {
-	private var _sm:SysManager;
+	private var _sm:SystemManager;
 	private var _em:EntityManager;
 	private var _running:Bool;
 
