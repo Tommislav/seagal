@@ -141,6 +141,7 @@ class EntityManager
 	 * @param	compClasses
 	 * @return Array of EW (lightweight EntityWrappers)
 	 */
+	public function getEWC(compClasses:Array<Dynamic>):Array<EW> { return getEntitiesWithComponents(compClasses); }
 	public function getEntitiesWithComponents(compClasses:Array<Dynamic>):Array<EW>
 	{
 		var a:Array<EW> = new Array<EW>();

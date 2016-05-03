@@ -23,7 +23,7 @@ with entities. Another thing is to be able to chain commands easily.
 Syntax looks like this:
 
 // Creates an instance of a manager for all entities
-manager = new EntManager();
+manager = new EntityManager();
 
 // Allocate new entity and add components directly on it
 manager.allocateEntity().addComponent(new PositionComponent(0,0)).addComponent(new RenderComponent(someBitmap));
@@ -34,12 +34,12 @@ entities:Array<EW> = manager.getEWC([PositionComponent]);
 // The EW-class is an EntityWrapper. You can modify properties directly on it:
 _ew = entities[0];
 _ew.addComponent(new GravityComponent(3));
-_ew.comp(GravityComponent).gravity = 4;
+_ew.getComponent(GravityComponent).gravity = 4;
 
 // The comp-method will retrieve an instance of the component class regiestred
 // with that entity. If no component of that type exists - a new instance will
 // be created, registred and returned
-_ew.comp(VelocityComponent).vx = 5;
+_ew.getComponent(VelocityComponent).vx = 5;
 
 
 
