@@ -60,8 +60,8 @@ class EntityManagerTest extends TestCase
 		var ew1 = manager.allocateEntity().addComponent(new StringComponent("ett"));
 		var ew2 = manager.allocateEntity().addComponent(new StringComponent("två"));
 		
-		assertEquals("ett", ew1.comp(StringComponent).string);
-		assertEquals("två", ew2.comp(StringComponent).string);
+		assertEquals("ett", ew1.getComponent(StringComponent).string);
+		assertEquals("två", ew2.getComponent(StringComponent).string);
 	}
 	
 	public function testGetAllComponents()
@@ -78,10 +78,10 @@ class EntityManagerTest extends TestCase
 		var e:EW = manager.allocateEntity();
 		
 		// set value on non created component
-		e.comp(StringComponent).string = "abc";
+		e.getComponent(StringComponent).string = "abc";
 		
 		// new component should be registred with the set value
-		assertEquals("abc", e.comp(StringComponent).string);
+		assertEquals("abc", e.getComponent(StringComponent).string);
 	}
 	
 	public function testGetEntityFromSingleComponent()
@@ -101,8 +101,8 @@ class EntityManagerTest extends TestCase
 			.addComponent(new NumericComponent(4));
 		
 		assertEquals(2, manager.getEntitiesWithComponents([StringComponent]).length);
-		assertEquals("ett", manager.getEntitiesWithComponents([StringComponent])[0].comp(StringComponent).string);
-		assertEquals("två", manager.getEntitiesWithComponents([StringComponent])[1].comp(StringComponent).string);
+		assertEquals("ett", manager.getEntitiesWithComponents([StringComponent])[0].getComponent(StringComponent).string);
+		assertEquals("två", manager.getEntitiesWithComponents([StringComponent])[1].getComponent(StringComponent).string);
 		assertEquals(3, manager.getEntitiesWithComponents([NumericComponent]).length);
 	}
 	

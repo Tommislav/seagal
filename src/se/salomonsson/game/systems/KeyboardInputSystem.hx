@@ -45,7 +45,7 @@ class KeyboardInputSystem extends Sys
 	
 	private function onKeyDown(e:KeyboardEvent):Void 
 	{
-		var comp:KeyboardInputComponent = _keyboardComponent.comp(KeyboardInputComponent);
+		var comp:KeyboardInputComponent = _keyboardComponent.getComponent(KeyboardInputComponent);
 		var keyIsDown:Bool = false;
 		for (i in 0...comp.keysDown.length) {
 			if (comp.keysDown[i] == e.keyCode) {
@@ -58,7 +58,7 @@ class KeyboardInputSystem extends Sys
 	
 	private function onKeyUp(e:KeyboardEvent):Void 
 	{
-		var comp:KeyboardInputComponent = _keyboardComponent.comp(KeyboardInputComponent);
+		var comp:KeyboardInputComponent = _keyboardComponent.getComponent(KeyboardInputComponent);
 		var keyIsDown:Bool = false;
 		for (i in 0...comp.keysDown.length) {
 			if (comp.keysDown[i] == e.keyCode) {

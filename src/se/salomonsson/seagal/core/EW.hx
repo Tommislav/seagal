@@ -53,7 +53,7 @@ class EW
 	/**
 	 * Get component of type <T> registred for this entity.
 	 */
-	public function comp<T>(componentClass:Class<T>):T
+	public function getComponent<T>(componentClass:Class<T>):T
 	{
 		var comp = _manager.getComponentOnEntity(_entity, componentClass);
 		

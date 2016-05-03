@@ -50,8 +50,8 @@ class RenderViewPortSystem extends Sys
 		if (_viewport == null)
 			_viewport = em().getEntitiesWithComponents([ViewPortComponent])[0];
 		
-		var canvas:BitmapData = _viewport.comp(CanvasComponent).canvas;
-		var camera:CameraComponent = _viewport.comp(CameraComponent);
+		var canvas:BitmapData = _viewport.getComponent(CanvasComponent).canvas;
+		var camera:CameraComponent = _viewport.getComponent(CameraComponent);
 		canvas.fillRect(canvas.rect, 0xcccccc);
 		
 		var camX:Float = camera.x * _layer.scrollX;

@@ -27,7 +27,7 @@ class SineMoveCameraSystem extends Sys
 	override public function onAdded(sm, em):Void 
 	{
 		super.onAdded(sm, em);
-		_camera = em.getComp(CameraComponent);
+		_camera = em.getComponent(CameraComponent);
 		
 		_w = 250;
 		_h = 250;

@@ -5,8 +5,6 @@ import flash.text.TextFieldAutoSize;
 import se.salomonsson.seagal.core.GameTime;
 import se.salomonsson.seagal.core.Sys;
 import se.salomonsson.game.components.CameraComponent;
-import se.salomonsson.game.components.CanvasComponent;
-import se.salomonsson.game.components.DebugComponent;
 
 /**
  * ...
@@ -29,7 +27,7 @@ class DebugCameraPositionSystem extends Sys
 	{
 		super.onAdded(sm, em);
 		
-		_camera = em.getComp(CameraComponent);
+		_camera = em.getComponent(CameraComponent);
 		
 		_tf = new TextField();
 		_tf.x = 250;

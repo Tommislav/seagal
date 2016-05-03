@@ -16,7 +16,7 @@ class Core {
 	public function new() {
 		
 		SLogger.init();
-		
+
 		_em = new EntityManager();
 		setSystemManager(new SystemManager("::default"));
 		_time = new GameTimeImpl();
@@ -24,7 +24,6 @@ class Core {
 
 	public function tick() {
 		_time.onTick();
-		
 		_sm.tick(_time);
 	}
 
