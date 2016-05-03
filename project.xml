@@ -22,9 +22,9 @@
 	
 	
 	
-	<haxelib name="openfl" />
-	<haxelib name="actuate" />
-	<haxelib name="gameconsole" />
+	<haxelib name="openfl" version="3.6.0"/>
+	<haxelib name="actuate" version="1.8.6"/>
+	<haxelib name="dconsole" version="5.0.0"/>
 	
 	<assets path="Assets" rename="assets" exclude="*.svg" />
 	<icon path="Assets/openfl.svg" />

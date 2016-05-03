@@ -1,5 +1,6 @@
 package;
 
+import pgr.dconsole.DC;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.Lib;
@@ -21,10 +22,9 @@ class Main
 		//#if unittest
 			var instance = new TestRunner();
 		//#else
-			//var instance = new Test2dGame(stage);
-			//GameConsole.toFront();
+//			var instance = new Test2dGame(stage);
+//			DC.toFront();
 		//#end
-		
-		
+
 	}
 }
