@@ -11,14 +11,14 @@ package se.salomonsson.seagal.core;
 class EW 
 {
 	private var _entity:Int;
-	private var _manager:EntManager;
+	private var _manager:EntityManager;
 	
 	/**
 	 * Initiates a new EntityWrapper with the connectcion between the entityManager and the entity.
 	 * @param	entity
 	 * @param	manager
 	 */
-	public function new(entity:Int, manager:EntManager) 
+	public function new(entity:Int, manager:EntityManager)
 	{
 		_entity = entity;
 		_manager = manager;
@@ -93,5 +93,5 @@ class EW
 	
 	
 	public function getEntity():Int { return _entity; }
-	public function getManager():EntManager { return _manager; }
+	public function getManager():EntityManager { return _manager; }
 }

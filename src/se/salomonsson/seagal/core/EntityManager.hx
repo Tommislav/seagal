@@ -8,7 +8,7 @@ import flash.events.EventDispatcher;
  * @author Tommislav
  */
 
-class EntManager 
+class EntityManager
 {
 	private static var _entityCounter:Int = 0;
 	private static var _disposedEntities:Array<Int> = new Array<Int>();

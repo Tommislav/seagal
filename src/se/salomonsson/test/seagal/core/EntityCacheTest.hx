@@ -2,7 +2,7 @@ package se.salomonsson.test.seagal.core;
 import haxe.PosInfos;
 import haxe.unit.TestCase;
 import se.salomonsson.seagal.core.EntityCache;
-import se.salomonsson.seagal.core.EntManager;
+import se.salomonsson.seagal.core.EntityManager;
 import se.salomonsson.seagal.core.EW;
 import se.salomonsson.test.seagal.core.comp.NumericComponent;
 import se.salomonsson.test.seagal.core.comp.StringComponent;
@@ -14,13 +14,13 @@ import se.salomonsson.test.seagal.core.comp.StringComponent;
 class EntityCacheTest extends TestCase
 {
 	private var _cache:EntityCache;
-	private var _em:EntManager;
+	private var _em:EntityManager;
 	private var _entityListOne:Array<EW>;
 	private var _entityListTwo:Array<EW>;
 	
 	override public function setup():Void 
 	{
-		_em 			= new EntManager();
+		_em 			= new EntityManager();
 		_entityListOne 	= [new EW(0, _em), new EW(1, _em)];
 		_entityListTwo 	= [new EW(2, _em)];
 		

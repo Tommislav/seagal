@@ -10,14 +10,14 @@ import se.salomonsson.seagal.debug.SLogger;
 
 class Core {
 	private var _sm:SysManager;
-	private var _em:EntManager;
+	private var _em:EntityManager;
 	private var _time:GameTimeImpl;
 
 	public function new() {
 		
 		SLogger.init();
 		
-		_em = new EntManager();
+		_em = new EntityManager();
 		setSystemManager(new SysManager("::default"));
 		_time = new GameTimeImpl();
 	}
@@ -37,7 +37,7 @@ class Core {
 		return _sm;
 	}
 
-	public function getEntManager():EntManager {
+	public function getEntManager():EntityManager {
 		return _em;
 	}
 

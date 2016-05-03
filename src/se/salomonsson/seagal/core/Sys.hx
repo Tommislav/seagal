@@ -8,7 +8,7 @@ import flash.events.Event;
 
 class Sys {
 	private var _sm:SysManager;
-	private var _em:EntManager;
+	private var _em:EntityManager;
 	private var _running:Bool;
 
 	public function new() {
@@ -22,7 +22,7 @@ class Sys {
 
 	public function onRemoved():Void { _sm = null; }
 	public function getManager() { return _sm; }
-	public function em():EntManager { return _em; } // change to getter method
+	public function em():EntityManager { return _em; } // change to getter method
 
 	public function pause() {_running = false;}
 	public function resume() {_running = true;}

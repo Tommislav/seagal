@@ -1,6 +1,6 @@
 package se.salomonsson.test.seagal.core;
 import haxe.unit.TestCase;
-import se.salomonsson.seagal.core.EntManager;
+import se.salomonsson.seagal.core.EntityManager;
 import se.salomonsson.seagal.core.EW;
 import se.salomonsson.test.seagal.core.comp.NumericComponent;
 import se.salomonsson.test.seagal.core.comp.StringComponent;
@@ -18,7 +18,7 @@ class EntityManagerTest extends TestCase
 
 	public function testCreateEntity()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		var ew:EW = manager.allocateEntity();
 		assertTrue( ew != null );
 		assertEquals(manager, ew.getManager());
@@ -26,7 +26,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testGetOneComponent()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		manager.allocateEntity().addComponent(new StringComponent("test"));
 		
 		assertEquals("test", manager.getComponents(StringComponent)[0].string);
@@ -48,7 +48,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testGetSingleComponent()
 	{
-		var manager = new EntManager();
+		var manager = new EntityManager();
 		manager.allocateEntity().addComponent(new StringComponent("ett"));
 		assertEquals("ett", manager.getComponent(StringComponent).string);
 		
@@ -56,7 +56,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testGetComponentFromEntity()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		var ew1 = manager.allocateEntity().addComponent(new StringComponent("ett"));
 		var ew2 = manager.allocateEntity().addComponent(new StringComponent("två"));
 		
@@ -66,7 +66,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testGetAllComponents()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		var e:EW = manager.allocateEntity().addComponent(new StringComponent("text")).addComponent(new NumericComponent(1));
 		var all = e.all();
 		assertEquals(2, all.length);
@@ -74,7 +74,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testCreateNonExistantComponent()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		var e:EW = manager.allocateEntity();
 		
 		// set value on non created component
@@ -86,7 +86,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testGetEntityFromSingleComponent()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		manager.allocateEntity()
 			.addComponent(new StringComponent("ett"))
 			.addComponent(new NumericComponent(1));
@@ -108,7 +108,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testGetEntityFromMultipleComponents()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		manager.allocateEntity()
 			.addComponent(new StringComponent("ett"))
 			.addComponent(new NumericComponent(1));
@@ -125,7 +125,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testDestroyEntity()
 	{
-		var manager:EntManager = new EntManager();
+		var manager:EntityManager = new EntityManager();
 		var entity:EW = manager.allocateEntity().addComponent(new StringComponent("test"));
 		var intEnt:Int = entity.getEntity();
 		entity.destroy();
@@ -137,7 +137,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testRemoveComponentThroughManager()
 	{
-		var manager 		= new EntManager();
+		var manager 		= new EntityManager();
 		var stringComponent = new StringComponent("ett");
 		var numComponent 	= new NumericComponent(1);
 		var ew 				= manager.allocateEntity().addComponent(stringComponent).addComponent(numComponent);
@@ -148,7 +148,7 @@ class EntityManagerTest extends TestCase
 	
 	public function testRemoveComponentThroughEW()
 	{
-		var manager 		= new EntManager();
+		var manager 		= new EntityManager();
 		var stringComponent = new StringComponent("ett");
 		var numComponent 	= new NumericComponent(1);
 		var ew 				= manager.allocateEntity().addComponent(stringComponent).addComponent(numComponent);

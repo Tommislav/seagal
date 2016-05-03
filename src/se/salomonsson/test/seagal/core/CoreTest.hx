@@ -1,7 +1,7 @@
 package se.salomonsson.test.seagal.core;
 import haxe.unit.TestCase;
 import se.salomonsson.seagal.core.Core;
-import se.salomonsson.seagal.core.EntManager;
+import se.salomonsson.seagal.core.EntityManager;
 import se.salomonsson.seagal.core.SysManager;
 
 /**
@@ -18,7 +18,7 @@ class CoreTest extends TestCase
 		var sm = Std.is(core.getSystemManager(), SysManager) ? "sysManager" : "err";
 		assertEquals("sysManager", sm);
 		
-		var em = Std.is(core.getEntManager(), EntManager) ? "entManager" : "err";
+		var em = Std.is(core.getEntManager(), EntityManager) ? "entManager" : "err";
 		assertEquals("entManager", em);
 	}
 	

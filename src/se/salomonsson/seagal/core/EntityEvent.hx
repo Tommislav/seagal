@@ -11,9 +11,9 @@ class EntityEvent extends Event
 	public static inline var ENTITY_DESTROYED:String = "EntityEvent.ENTITY_DESTROYED";
 	
 	public var entity:Int;
-	public var entManager:EntManager;
+	public var entManager:EntityManager;
 	
-	public function new(type:String, entity:Int, entManager:EntManager) 
+	public function new(type:String, entity:Int, entManager:EntityManager)
 	{
 		super(type);
 		this.entity = entity;

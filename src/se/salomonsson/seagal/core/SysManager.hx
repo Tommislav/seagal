@@ -11,7 +11,7 @@ class SysManager
 	private var _id:String;
 	private var _systemPriorities:Array<Int>;
 	private var _sysHash:Array<Array<Sys>>;
-	private var _em:EntManager;
+	private var _em:EntityManager;
 	private var _dispatcher:EventDispatcher;
 	private var _running:Bool;
 	
