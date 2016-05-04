@@ -2,51 +2,52 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
     <movie path="project.xml" />
     <movie fps="30" />
     <movie width="800" />
     <movie height="600" />
-    <movie version="3" />
+    <movie version="0" />
     <movie minorVersion="0" />
-    <movie platform="NME" />
+    <movie platform="Lime" />
     <movie background="FFFFFF" />
     <movie preferredSDK="Haxe 3.0.0;3.0.0;" />
   </output>
   <!-- Other classes to be compiled into your SWF -->
   <classpaths>
+    <class path="D:\sdk\haxe\haxe\lib\openfl\3,6,0" />
+    <class path="D:\sdk\haxe\haxe\lib\lime\2,9,0" />
+    <class path="D:\sdk\haxe\haxe\lib\actuate\1,8,6" />
+    <class path="D:\sdk\haxe\haxe\lib\dconsole\5,0,0\src" />
+    <class path="D:\sdk\haxe\haxe\lib\hscript\2,0,4" />
     <class path="src" />
+    <class path="D:\sdk\haxe\haxe\lib\openfl\3,6,0\extern" />
     <class path="Export\windows\cpp\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="tools=1&#xA;openfl_ver=1.0.8&#xA;openfl&#xA;display&#xA;windows&#xA;desktop" />
+    <option directives="openfl=3.6.0&#xA;lime=2.9.0&#xA;actuate=1.8.6&#xA;dconsole=5.0.0&#xA;hscript=2.0.4&#xA;openfl-next&#xA;tools=2.9.0&#xA;no-compilation&#xA;native&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
     <option flashStrict="False" />
-    <option mainClass="TestRunner" />
+    <option noInlineOnDebug="False" />
+    <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--no-output&#xA;--macro allowPackage(&quot;flash&quot;)" />
+    <option additional="--remap flash:openfl&#xA;#--macro keep(&quot;Main&quot;)&#xA;-debug " />
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="openfl" />
-    <library name="actuate" />
-    <library name="gameconsole" />
+    <!-- example: <library name="..." /> -->
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
-    <compile path="src\TestRunner.hx" />
+    <compile path="src\Main.hx" />
   </compileTargets>
-  <!-- Assets to embed into the output SWF -->
-  <library>
-    <!-- example: <asset path="..." id="..." update="..." glyphs="..." mode="..." place="..." sharepoint="..." /> -->
-  </library>
   <!-- Paths to exclude from the Project Explorer tree -->
   <hiddenPaths>
     <hidden path="obj" />
   </hiddenPaths>
   <!-- Executed before build -->
-  <preBuildCommand />
+  <preBuildCommand>"$(CompilerPath)/haxelib" run lime build "$(OutputFile)" $(TargetBuild) -$(BuildConfig) -Dfdb</preBuildCommand>
   <!-- Executed after build -->
   <postBuildCommand alwaysRun="False" />
   <!-- Other project options -->

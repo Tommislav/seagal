@@ -1,32 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
-	
-	<meta 
-		title="Seagal" 
-		package="se.salomonsson.seagal" 
-		version="1.0.0" 
-		company="Salomonsson.se | Pixeltruss.com" />
-	
-	<!--app 
-		main="TestRunner" 
-		path="Export" 
+
+	<meta
+			title="Seagal"
+			package="se.salomonsson.seagal"
+			version="1.0.0"
+			company="Salomonsson.se | Pixeltruss.com"/>
+
+	<!--app
+		main="TestRunner"
+		path="Export"
 		file="SeagalUnittests" /-->
-	
-	<app 
-		main="Main" 
-		path="Export" 
-		file="TestGame" />
-		
-	<source path="src" />
-	
-	
-	
-	
+
+	<app
+			main="Main"
+			path="Export"
+			file="TestGame"/>
+
+	<source path="src"/>
+
+
 	<haxelib name="openfl" version="3.6.0"/>
 	<haxelib name="actuate" version="1.8.6"/>
 	<haxelib name="dconsole" version="5.0.0"/>
-	
-	<assets path="Assets" rename="assets" exclude="*.svg" />
-	<icon path="Assets/openfl.svg" />
-	
+
+
+	<assets path="Assets" rename="assets" exclude="*.svg"/>
+	<icon path="Assets/openfl.svg"/>
+
 </project>

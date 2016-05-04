@@ -1,4 +1,8 @@
 package ;
+import pgr.dconsole.DC;
+import se.salomonsson.seagal.debug.SLogger;
+import flash.geom.Rectangle;
+import flash.geom.Point;
 import openfl.Assets;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -23,57 +27,56 @@ import se.salomonsson.game.utils.PixelMapParser;
  * @author Tommislav
  */
 
-class Test2dGame 
-{
+class Test2dGame {
 	private var _stage:Stage;
 	private var _core:Core;
 
-	public function new(stage:Stage) 
-	{
+	public function new(stage:Stage) {
+		stage.frameRate = 60;
 		_stage = stage;
 		_core = new Core();
-		
-		var map:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/map.gif"));
+
+		var map:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/map.png"));
 		var tiles:BitmapData = Assets.getBitmapData("assets/Image1.png");
-		
+
 		var canvas:BitmapData = buildCanvas(640, 480);
-		
+
 		_core.getEntManager().allocateEntity()
-			.addComponent(new ViewPortComponent("main"))
-			.addComponent(new CameraComponent("camera"))
-			.addComponent(TileModelComponent.build([tiles]))
-			.addComponent(CanvasComponent.build(canvas));
-		
+		.addComponent(new ViewPortComponent("main"))
+		.addComponent(new CameraComponent("camera"))
+		.addComponent(TileModelComponent.build([tiles]))
+		.addComponent(CanvasComponent.build(canvas));
+
 		_core.getEntManager().allocateEntity()
-			.addComponent(TileLayerComponent.build("main", 10, map));
-		
-			
+		.addComponent(TileLayerComponent.build("main", 10, map));
+
+
 		_core.getEntManager().allocateEntity().addComponent(new DebugComponent()); // remove in release build
-		
+
 		_core.addSystem(new KeyboardInputSystem(), 1);
 		_core.addSystem(new MoveCameraWithKeyboardSystem(), 2);
-		//_core.addSystem(new SineMoveCameraSystem("camera"), 2);
-		_core.addSystem(new RenderViewPortSystem("main", canvas), 3);
-		_core.addSystem(new DebugCameraPositionSystem(_stage),4);
-		
-		
-			
-			
+		_core.addSystem(new SineMoveCameraSystem("camera"), 2);
+		_core.addSystem(new RenderViewPortSystem("main", tiles), 3);
+		_core.addSystem(new DebugCameraPositionSystem(_stage), 4);
+
+		SLogger.log(this, "framerate: " + stage.frameRate);
+
 		_stage.addEventListener(Event.ENTER_FRAME, onEf);
 	}
-	
-	private function onEf(e:Event):Void 
-	{
+
+	private function onEf(e:Event):Void {
+		DC.beginProfile("mainLoop");
 		_core.tick();
+		DC.endProfile("mainLoop");
 	}
-	
-	
+
+
 	private function buildCanvas(width:Int, height:Int):BitmapData {
 		var bd:BitmapData = new BitmapData(width, height, false, 0xffcc00);
 		var bmp:Bitmap = new Bitmap(bd);
 		bmp.x = bmp.y = 10;
 		_stage.addChild(bmp);
-		
+
 		return bd;
 	}
 }

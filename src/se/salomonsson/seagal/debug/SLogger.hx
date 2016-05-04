@@ -29,9 +29,9 @@ class SLogger {
         #end
     }
 
-    public static function registerFunction(object:Dynamic, name:String, alias:String, ?monitor:Bool = false) {
+    public static function registerFunction(func:Dynamic, alias:String, description:String) {
         #if debug
-        DC.registerFunction(object, name, alias, monitor);
+        DC.registerFunction(func, alias, description);
         #end
     }
 
