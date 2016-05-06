@@ -1,5 +1,5 @@
 package se.salomonsson.game.components;
-import flash.display.BitmapData;
+import openfl.display.Graphics;
 import se.salomonsson.seagal.core.IComponent;
 
 /**
@@ -10,14 +10,14 @@ import se.salomonsson.seagal.core.IComponent;
 class CanvasComponent implements IComponent
 {
 
-	public var canvas:BitmapData;
+	public var canvas:Graphics;
 	
 	public function new() 
 	{
 		
 	}
 	
-	public static function build(canvas:BitmapData):CanvasComponent {
+	public static function build(canvas:Graphics):CanvasComponent {
 		var c:CanvasComponent = new CanvasComponent();
 		c.canvas = canvas;
 		return c;

@@ -1,4 +1,7 @@
 package se.salomonsson.game.systems;
+import flash.display.Graphics;
+import se.salomonsson.game.components.TileSheetComponent;
+import openfl.display.Tilesheet;
 import pgr.dconsole.DC;
 import se.salomonsson.seagal.debug.SLogger;
 import openfl.Assets;
@@ -24,22 +27,23 @@ class RenderViewPortSystem extends System {
 	private var _layerId:String;
 	private var _cameraId:String;
 	private var _layer:TileLayerComponent;
-	private var _camera:CameraComponent;
-	private var _sheet:BitmapData;
+	private var _sheet:Tilesheet;
 	private var _debug:DebugComponent;
 
-	private var _p:Point;
-	private var _r:Rectangle;
+	private var _canvas:Graphics;
+	private var _camera:CameraComponent;
 
-	public function new(viewportId:String, sheet:BitmapData) {
+	public function new(viewportId:String) {
 		super();
 		_layerId = "main";
-
-		_p = new Point();
-		_r = new Rectangle(0, 0, 64, 64);
-
-		_sheet = sheet;
 	}
+
+	override public function onAdded(sm, em):Void {
+		super.onAdded(sm, em);
+		_sheet = entityManager.getComponent(TileSheetComponent).sheet;
+	}
+
+
 
 
 	override public function tick(gt:GameTime):Void {
@@ -48,23 +52,25 @@ class RenderViewPortSystem extends System {
 
 		if (_layer == null) {
 			_layer = getLayerFromId(_layerId);
-//			SLogger.log(this, "layer: " + _layer);
 		}
 
-		if (_viewport == null) {
-			_viewport = entityManager.getEWC([ViewPortComponent])[0];
-//			SLogger.log(this, "viewport: " + _viewport);
+		if (_canvas == null) {
+			_canvas = entityManager.getComponent(CanvasComponent).canvas;
 		}
 
-		var canvas:BitmapData = _viewport.getComponent(CanvasComponent).canvas;
-		var camera:CameraComponent = _viewport.getComponent(CameraComponent);
-		canvas.fillRect(canvas.rect, 0xcccccc);
+		if (_camera == null) {
+			_camera = entityManager.getComponent(CameraComponent);
+		}
 
-		var camX:Float = camera.x * _layer.scrollX;
-		var camY:Float = camera.y * _layer.scrollY;
 
-		var w:Int = Math.ceil(camera.width / 64) + 1;
-		var h:Int = Math.ceil(camera.height / 64) + 1;
+		var tileData:Array<Float> = new Array<Float>();
+		_canvas.clear();
+
+		var camX:Float = _camera.x * _layer.scrollX;
+		var camY:Float = _camera.y * _layer.scrollY;
+
+		var w:Int = Math.ceil(_camera.width / 64) + 1;
+		var h:Int = Math.ceil(_camera.height / 64) + 1;
 		var tileX:Int = Math.floor(camX / 64);
 		var tileY:Int = Math.floor(camY / 64);
 
@@ -77,18 +83,24 @@ class RenderViewPortSystem extends System {
 				var col:Int = _layer.map.atCoord(x + tileX, y + tileY);
 				if (col != 0xffffff) {
 
-					_r.x = 0;
+					var tileId = 0;
 					if (col == 0x000000)
-						_r.x = 0;
+						tileId = 0;
 					else if (col == 0xff0000)
-						_r.x = 64;
+						tileId = 1;
 
-					_p.x = (x * 64) - offX;
-					_p.y = (y * 64) - offY;
-					canvas.copyPixels(_sheet, _r, _p, true);
+					var x:Float = (x * 64) - offX;
+					var y:Float = (y * 64) - offY;
+
+					tileData.push(x);
+					tileData.push(y);
+					tileData.push(tileId);
 				}
 			}
 		}
+
+		_sheet.drawTiles(_canvas, tileData);
+
 		DC.endProfile("Render");
 	}
 

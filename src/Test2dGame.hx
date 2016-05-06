@@ -1,4 +1,7 @@
 package ;
+import se.salomonsson.game.components.TileSheetComponent;
+import flash.display.Sprite;
+import openfl.display.Tilesheet;
 import pgr.dconsole.DC;
 import se.salomonsson.seagal.debug.SLogger;
 import flash.geom.Rectangle;
@@ -27,6 +30,11 @@ import se.salomonsson.game.utils.PixelMapParser;
  * @author Tommislav
  */
 
+	// TileModel: holds data for tiles
+	// Layer: index, tileData, scrollXY
+
+
+
 class Test2dGame {
 	private var _stage:Stage;
 	private var _core:Core;
@@ -39,13 +47,22 @@ class Test2dGame {
 		var map:PixelMapParser = new PixelMapParser(Assets.getBitmapData("assets/map.png"));
 		var tiles:BitmapData = Assets.getBitmapData("assets/Image1.png");
 
-		var canvas:BitmapData = buildCanvas(640, 480);
+		var sheet:Tilesheet = new Tilesheet(tiles);
+		sheet.addTileRect(new Rectangle(0,0,64,64));
+		sheet.addTileRect(new Rectangle(64,0,64,64));
+
+		//var canvas:BitmapData = buildCanvas(640, 480);
+		var canvas:Sprite = new Sprite();
+		canvas.scrollRect = new Rectangle(0,0,600, 480); // don't work on html5 target
+		canvas.x = canvas.y = 70;
+		_stage.addChild(canvas);
+
 
 		_core.getEntManager().allocateEntity()
 		.addComponent(new ViewPortComponent("main"))
 		.addComponent(new CameraComponent("camera"))
-		.addComponent(TileModelComponent.build([tiles]))
-		.addComponent(CanvasComponent.build(canvas));
+		.addComponent(TileSheetComponent.build(sheet))
+		.addComponent(CanvasComponent.build(canvas.graphics));
 
 		_core.getEntManager().allocateEntity()
 		.addComponent(TileLayerComponent.build("main", 10, map));
@@ -56,7 +73,7 @@ class Test2dGame {
 		_core.addSystem(new KeyboardInputSystem(), 1);
 		_core.addSystem(new MoveCameraWithKeyboardSystem(), 2);
 		_core.addSystem(new SineMoveCameraSystem("camera"), 2);
-		_core.addSystem(new RenderViewPortSystem("main", tiles), 3);
+		_core.addSystem(new RenderViewPortSystem("main"), 3); // TODO: Change so this uses tilesheet instead of drawPixel http://www.openfl.org/documentation/api/openfl/display/Tilesheet.html
 		_core.addSystem(new DebugCameraPositionSystem(_stage), 4);
 
 		SLogger.log(this, "framerate: " + stage.frameRate);

@@ -21,7 +21,7 @@ class CameraComponent implements IComponent
 		
 		x = 0;
 		y = 0;
-		width = 800;
+		width = 600;
 		height = 480;
 	}
 	
