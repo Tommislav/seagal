@@ -4,8 +4,8 @@ import flash.display.Stage;
 import flash.events.Event;
 import flash.events.KeyboardEvent;
 import flash.Lib;
-import se.salomonsson.seagal.core.EW;
-import se.salomonsson.seagal.core.System;
+import se.salomonsson.legacy.core.EW;
+import se.salomonsson.legacy.core.System;
 import se.salomonsson.game.components.KeyboardInputComponent;
 
 /**

@@ -1,5 +1,5 @@
 package se.salomonsson.game.components;
-import se.salomonsson.seagal.core.IComponent;
+import se.salomonsson.legacy.core.IComponent;
 
 /**
  * ...

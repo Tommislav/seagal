@@ -1,7 +1,6 @@
 package;
 
-import se.salomonsson.perftest.PerfTest;
-import pgr.dconsole.DC;
+import se.salomonsson.legacy.perftest.PerfTest;
 import flash.display.StageAlign;
 import flash.display.StageScaleMode;
 import flash.Lib;
@@ -23,8 +22,8 @@ class Main
 		//#if unittest
 //			var instance = new TestRunner();
 		//#else
-			//var instance = new Test2dGame(stage);
-			//DC.toFront();
+//			var instance = new Test2dGame(stage);
+//			DC.toFront();
 		//#end
 
 		var p:PerfTest = new PerfTest();

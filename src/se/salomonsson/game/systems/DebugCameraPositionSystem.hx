@@ -2,8 +2,8 @@ package se.salomonsson.game.systems;
 import flash.display.DisplayObjectContainer;
 import flash.text.TextField;
 import flash.text.TextFieldAutoSize;
-import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.System;
+import se.salomonsson.legacy.core.GameTime;
+import se.salomonsson.legacy.core.System;
 import se.salomonsson.game.components.CameraComponent;
 
 /**

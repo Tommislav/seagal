@@ -1,8 +1,8 @@
 package ;
-import se.salomonsson.test.seagal.core.CoreTest;
-import se.salomonsson.test.seagal.core.EntityCacheTest;
-import se.salomonsson.test.seagal.core.EntityManagerTest;
-import se.salomonsson.test.seagal.core.SystemManagerTest;
+import se.salomonsson.test.legacy.core.CoreTest;
+import se.salomonsson.test.legacy.core.EntityCacheTest;
+import se.salomonsson.test.legacy.core.EntityManagerTest;
+import se.salomonsson.test.legacy.core.SystemManagerTest;
 import se.salomonsson.test.game.utils.PixelMapParserTest;
 
 /**

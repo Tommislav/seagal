@@ -1,7 +1,7 @@
 package se.salomonsson.game.systems;
 import flash.ui.Keyboard;
-import se.salomonsson.seagal.core.GameTime;
-import se.salomonsson.seagal.core.System;
+import se.salomonsson.legacy.core.GameTime;
+import se.salomonsson.legacy.core.System;
 import se.salomonsson.game.components.CameraComponent;
 import se.salomonsson.game.components.KeyboardInputComponent;
 

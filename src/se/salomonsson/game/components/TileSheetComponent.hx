@@ -1,6 +1,6 @@
 package se.salomonsson.game.components;
 import openfl.display.Tilesheet;
-import se.salomonsson.seagal.core.IComponent;
+import se.salomonsson.legacy.core.IComponent;
 class TileSheetComponent implements IComponent {
 
 	public var sheet:Tilesheet;
