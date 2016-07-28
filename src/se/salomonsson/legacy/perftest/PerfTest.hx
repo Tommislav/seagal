@@ -13,7 +13,7 @@ class PerfTest {
 	4. Fetch all Entities which holds component of both T0 and T1
 	 */
 
-	public static inline var NUM_ENTITIES = 10000;
+	public static inline var NUM_ENTITIES = 100000;
 	public var log = "\n";
 
 	public function new() {

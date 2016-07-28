@@ -13,14 +13,24 @@ class EntityManager {
 	private static var _disposedEntities:Array<Int> = new Array<Int>();
 
 	private var _entities:Array<Int>;
-	private var _entityHash:Array<Array<IComponent>>;
+	private var _entityFlags:Array<Int>;
+	private var _entityComponents:Array<Array<IComponent>>;
+	
+	//private var _entityHash:Array<Array<IComponent>>;
+	
+	
+	
+	
+	
 
 	// This really needs to be looked over!
 	private var _eventDispatcher:EventDispatcher;
 
 	public function new() {
 		_entities = new Array<Int>();
-		_entityHash = new Array<Array<IComponent>>();
+		_entityFlags = new Array<Int>();
+		_entityComponents = new Array<Array<IComponent>>();
+		//_entityHash = new Array<Array<IComponent>>();
 		_eventDispatcher = new EventDispatcher();
 	}
 
@@ -33,7 +43,9 @@ class EntityManager {
 		}
 
 		_entities.push(entity);
-		_entityHash[entity] = new Array<IComponent>();
+		_entityFlags[entity] = 0;
+		_entityComponents[entity] = new Array<IComponent>();
+		//_entityHash[entity] = new Array<IComponent>();
 
 		return new EW(entity, this);
 	}
@@ -41,59 +53,92 @@ class EntityManager {
 	public function destroyEntity(entity:Int):Void {
 		if (_entities.remove(entity)) {
 			dispatch(new EntityEvent(EntityEvent.ENTITY_DESTROYED, entity, this));
-			_entityHash[entity] = null;
+			_entityComponents[entity] = null;
+			_entityFlags[entity] = 0;
+			//_entityHash[entity] = null;
 		}
 		_disposedEntities.push(entity);
 	}
 
 	public function addComponentOn(component:IComponent, entity:Int):Void {
-		if (_entityHash[entity] == null) {
-			#if debug
-			throw "No such entity exists";
-			#end
-			return;
+		
+		if (_entityFlags[entity] & component._iFlag != 0) {
+			throw "Component of type " + component + " already exist on entity";
 		}
-
-		_entityHash[entity].push(component);
+		
+		_entityFlags[entity] |= component._iFlag;
+		_entityComponents[entity].push(component);
+		//
+		//if (_entityHash[entity] == null) {
+			//#if debug
+			//throw "No such entity exists";
+			//#end
+			//return;
+		//}
+		
+		//_entityHash[entity].push(component);
 	}
 
 	public function removeComponentFrom(component:IComponent, entity:Int):Void {
-		_entityHash[entity].remove(component);
+		_entityFlags[entity] &= ~component._iFlag;
+		_entityComponents[entity].remove(component);
+		//_entityHash[entity].remove(component);
 	}
 
 
 	public function hasComponent(entity:Int, compClass:Dynamic):Bool { // Remove dynamic?
-		var entHash = _entityHash[entity];
-		for (i in 0...entHash.length) {
-			if (Std.is(entHash[i], compClass))
-				return true;
-		}
-		return false;
+		return _entityFlags[entity] & compClass._iFlag != 0;
+		
+		//var entHash = _entityHash[entity];
+		//for (i in 0...entHash.length) {
+			//if (Std.is(entHash[i], compClass))
+				//return true;
+		//}
+		//return false;
 	}
 
 	/**
-	 * Get all arrays of a given type, no matter which Entity it belongs to.
+	 * Get an array of all existing components of a specific type, no matter which Entity it belongs to.
 	 */
 
 	public function getComponents<T>(componentClass:Class<T>):Array<T> {
 		var ret:Array<T> = new Array<T>();
 
 		var len:Int = _entities.length;
+		var flag = (untyped componentClass)._sFlag;
 
 		for (i in 0...len) {
 			var e:Int = _entities[i];
-			var entHash:Array<IComponent> = _entityHash[e];
-			for (j in 0...entHash.length) {
-				if (Std.is(entHash[j], componentClass)) {
-					#if cpp
-					var comp = entHash[j];
-					ret.push(untyped __cpp__("comp->__GetRealObject()"));
-					#else
-					var comp = cast(entHash[j]);
-					(untyped ret).push(entHash[j]);
-					#end
+			if ( _entityFlags[e] & flag > 0) {
+				// TODO: Can we do this without this loop?
+				var a = _entityComponents[e];
+				for (j in 0...a.length) {
+					if (a[j]._iFlag == flag) {
+						
+						#if cpp
+						var comp = a[j];
+						ret.push(untyped __cpp__("comp->__GetRealObject()"));
+						#else
+						var comp = cast(a[j]); //TODO: can we remove this line??
+						(untyped ret).push(a[j]);
+						#end
+					}
 				}
 			}
+			
+			
+			//var entHash:Array<IComponent> = _entityHash[e];
+			//for (j in 0...entHash.length) {
+				//if (Std.is(entHash[j], componentClass)) {
+					//#if cpp
+					//var comp = entHash[j];
+					//ret.push(untyped __cpp__("comp->__GetRealObject()"));
+					//#else
+					//var comp = cast(entHash[j]);
+					//(untyped ret).push(entHash[j]);
+					//#end
+				//}
+			//}
 		}
 
 		return ret;
@@ -106,20 +151,29 @@ class EntityManager {
 	 */
 
 	public function getComponentOnEntity<T>(entity:Int, componentClass:Class<T>):T {
-		var ent = _entityHash[entity];
-
-		if (ent == null)
-			return null;
-
-		for (i in 0...ent.length) {
-			if (Std.is(ent[i], componentClass))
-				return cast ent[i]; // TODO: Is it possible to remove this cast?
+		var flag:Int = (untyped componentClass)._sFlag;
+		var comps = _entityComponents[entity];
+		for (i in 0...comps.length) {
+			if (comps[i]._iFlag == flag) {
+				return cast comps[i]; //TODO: Is it possible to remove this cast?
+			}
 		}
+		
+		//var ent = _entityHash[entity];
+
+		//if (ent == null)
+			//return null;
+
+		//for (i in 0...ent.length) {
+			//if (Std.is(ent[i], componentClass))
+				//return cast ent[i]; // TODO: Is it possible to remove this cast?
+		//}
 		return null;
 	}
 
 	public function getAllComponents(entity:Int):Array<IComponent> {
-		var ent = _entityHash[entity];
+		var ent = _entityComponents[entity];
+		//var ent = _entityHash[entity];
 		return (ent == null) ? new Array<IComponent>() : ent.copy();
 	}
 
@@ -134,22 +188,38 @@ class EntityManager {
 
 	public function getEntitiesWithComponents(compClasses:Array<Dynamic>):Array<EW> {
 		var a:Array<EW> = new Array<EW>();
-
+		var combinedFlag:Int = getCombinedFlag(compClasses);
+		
 		for (i in 0..._entities.length) {
 			var e:Int = _entities[i];
-			var match = true;
-			for (j in 0...compClasses.length) {
-				if (getComponentOnEntity(e, cast compClasses[j]) == null) {
-					match = false;
-					break;
-				}
-			}
-			if (match)
+			if (_entityFlags[e] & combinedFlag == combinedFlag) { //TODO: Is this really correct??? I think it should be!
 				a.push(new EW(e, this));
+			}
 		}
+		
+		//for (i in 0..._entities.length) {
+			//var e:Int = _entities[i];
+			//var match = true;
+			//for (j in 0...compClasses.length) {
+				//if (getComponentOnEntity(e, cast compClasses[j]) == null) {
+					//match = false;
+					//break;
+				//}
+			//}
+			//if (match)
+				//a.push(new EW(e, this));
+		//}
 		return a;
 	}
 
+	public inline function getCombinedFlag(compClasses:Array<Dynamic>):Int {
+		var f:Int = 0;
+		for (i in 0...compClasses.length) {
+			f |= compClasses[i]._sFlag;
+		}
+		return f;
+	}
+	
 	/**
 	 * Assumes that only one component of this type exists in the entire manager.
 	 * If more than one would exist, only the first occurance would be returned.

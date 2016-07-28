@@ -40,8 +40,8 @@ class SeagalMacro {
 			doc: "instance bitflag",
 			meta: [],
 			access: [APublic],
-			//kind: FVar(macro:Int, macro $v{bitflag}),
-			kind: FProp("default", "null", macro:Int, macro $v{bitflag}),
+			kind: FVar(macro:Int, macro $v{bitflag}),
+			//kind: FProp("get", "null", macro:Int, macro $v{bitflag}), //TODO: WTF, I want it to be default/null
 			pos:Context.currentPos()
 		});
 		

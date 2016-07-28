@@ -6,4 +6,6 @@ package se.salomonsson.legacy.core;
  */
 
 @:autoBuild(se.salomonsson.legacy.core.SeagalMacro.buildComponent())
-interface IComponent {}
+interface IComponent {
+	public var _iFlag:Int; // set by macro at compile time
+}

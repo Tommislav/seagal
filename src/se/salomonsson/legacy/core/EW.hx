@@ -18,8 +18,7 @@ class EW
 	 * @param	entity
 	 * @param	manager
 	 */
-	public function new(entity:Int, manager:EntityManager)
-	{
+	public function new(entity:Int, manager:EntityManager) {
 		_entity = entity;
 		_manager = manager;
 	}
@@ -33,8 +32,7 @@ class EW
 	 * @param	component	The component to be registred
 	 * @return	reference of itself
 	 */
-	public function addComponent(component:IComponent):EW
-	{
+	public function addComponent(component:IComponent):EW {
 		_manager.addComponentOn(component, _entity);
 		return this;
 	}
@@ -44,8 +42,7 @@ class EW
 	 * @param	component	The instance of the component to be removed
 	 * @return	reference to itself
 	 */
-	public function removeComponent(component:IComponent):EW
-	{
+	public function removeComponent(component:IComponent):EW {
 		_manager.removeComponentFrom(component, _entity);
 		return this;
 	}
@@ -53,14 +50,15 @@ class EW
 	/**
 	 * Get component of type <T> registred for this entity.
 	 */
-	public function getComponent<T>(componentClass:Class<T>):T
-	{
+	public function getComponent<T>(componentClass:Class<T>):T {
+		
 		var comp = _manager.getComponentOnEntity(_entity, componentClass);
 		
 		//if null, create, register and return new instance
-		if (comp == null)
-		{
+		if (comp == null) {
 			var newComp = Type.createEmptyInstance(componentClass);
+			// HAX: Need to set instanceFlag to same as staticFlag! Will be set to 0 with Type.createEmptyInstance!
+			(untyped newComp)._iFlag = (untyped componentClass)._sFlag;
 			addComponent(cast newComp);
 			return newComp;
 		}
@@ -76,8 +74,7 @@ class EW
 	/**
 	 * Will return an array of all components registred to this entity
 	 */
-	public function all():Array<IComponent>
-	{
+	public function all():Array<IComponent> {
 		return _manager.getAllComponents(_entity);
 	}
 	
@@ -85,8 +82,7 @@ class EW
 	 * Will unregister all components to this entity and delete the entity from the
 	 * entity manager.
 	 */
-	public function destroy():Void
-	{
+	public function destroy():Void {
 		_manager.destroyEntity(_entity);
 		//_manager = null;
 	}
