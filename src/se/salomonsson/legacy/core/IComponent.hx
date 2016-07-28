@@ -5,7 +5,5 @@ package se.salomonsson.legacy.core;
  * @author Tommislav
  */
 
-interface IComponent 
-{
-	
-}
+@:autoBuild(se.salomonsson.legacy.core.SeagalMacro.buildComponent())
+interface IComponent {}

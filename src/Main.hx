@@ -20,12 +20,12 @@ class Main
 		stage.align = StageAlign.TOP_LEFT;
 		
 		//#if unittest
-//			var instance = new TestRunner();
+			var instance = new TestRunner();
 		//#else
-//			var instance = new Test2dGame(stage);
-//			DC.toFront();
+			//var instance = new Test2dGame(stage);
+			//DC.toFront();
 		//#end
 
-		var p:PerfTest = new PerfTest();
+//		var p:PerfTest = new PerfTest();
 	}
 }

@@ -1,0 +1,21 @@
+Seagal v2.0
+Designed for speed!
+
+I want each system to describe which components it is interested in.
+Every time we add a new entity, or add/remove a component, we update the lists in the systems
+so that they always have an array of entity ids, and an array with the matching component for that entity
+for each component type that was registred.
+
+Something like
+
+::System::
+onInit
+	registerInterest(PositionComponent, RenderComponent)
+
+onUpdate
+	(arrays already populated)
+	[entity0, entity3, entity9]
+	[PositionComponent0, PositionComponent3, PositionComponent9]
+	[RenderComponent0, RenderComponent3, RenderComponent9]
+
+we can still ask entityManager for components, but that will be slower

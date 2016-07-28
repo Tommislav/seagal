@@ -14,7 +14,7 @@ class PerfTest {
 	 */
 
 	public static inline var NUM_ENTITIES = 10000;
-	public var log = "";
+	public var log = "\n";
 
 	public function new() {
 		caseOne();
@@ -41,7 +41,7 @@ class PerfTest {
 		var c:Core = buildECS();
 
 		var tot:Float = Timer.stamp() - start;
-		log += "Creating " + NUM_ENTITIES + " took " + tot + " sec\n";
+		log += "* Test 1: Creating " + NUM_ENTITIES + " entities took " + tot + " sec\n";
 
 		c.destroy();
 	}
@@ -55,7 +55,7 @@ class PerfTest {
 		c.tick();
 
 		var tot:Float = Timer.stamp() - start;
-		log += "getComponents(t0) took " + tot + " sec\n";
+		log += "* Test 2: getComponents(t0) took " + tot + " sec\n";
 		c.destroy();
 	}
 
@@ -67,7 +67,7 @@ class PerfTest {
 		c.tick();
 		var tot:Float = Timer.stamp() - start;
 
-		log += "getEWC([t0, t1])" + tot + " sec\n";
+		log += "* Test 3: getEWC([t0, t1])" + tot + " sec\n";
 		c.destroy();
 	}
 }

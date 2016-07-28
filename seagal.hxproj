@@ -23,16 +23,16 @@
     <class path="D:\sdk\haxe\haxe\lib\hscript\2,0,4" />
     <class path="src" />
     <class path="D:\sdk\haxe\haxe\lib\openfl\3,6,0\extern" />
-    <class path="Export\windows\cpp\haxe" />
+    <class path="Export\flash\haxe" />
   </classpaths>
   <!-- Build options -->
   <build>
-    <option directives="openfl=3.6.0&#xA;lime=2.9.0&#xA;actuate=1.8.6&#xA;dconsole=5.0.0&#xA;hscript=2.0.4&#xA;openfl-next&#xA;tools=2.9.0&#xA;no-compilation&#xA;native&#xA;lime-native&#xA;openfl-native&#xA;windows&#xA;desktop&#xA;display" />
+    <option directives="openfl=3.6.0&#xA;lime=2.9.0&#xA;actuate=1.8.6&#xA;dconsole=5.0.0&#xA;hscript=2.0.4&#xA;openfl-next&#xA;tools=2.9.0&#xA;no-compilation&#xA;openfl-flash&#xA;web&#xA;display" />
     <option flashStrict="False" />
     <option noInlineOnDebug="False" />
     <option mainClass="ApplicationMain" />
     <option enabledebug="True" />
-    <option additional="--remap flash:openfl&#xA;#--macro keep(&quot;Main&quot;)&#xA;-debug " />
+    <option additional="-swf-version 11.2&#xA;-debug " />
   </build>
   <!-- haxelib libraries -->
   <haxelib>

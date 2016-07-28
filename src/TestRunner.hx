@@ -1,4 +1,5 @@
 package ;
+import se.salomonsson.test.legacy.core.ComponentMacroTest;
 import se.salomonsson.test.legacy.core.CoreTest;
 import se.salomonsson.test.legacy.core.EntityCacheTest;
 import se.salomonsson.test.legacy.core.EntityManagerTest;
@@ -22,6 +23,7 @@ class TestRunner
 		runner.add( new SystemManagerTest() );
 		runner.add( new PixelMapParserTest() );
 		runner.add( new EntityCacheTest() );
+		runner.add( new ComponentMacroTest() );
 		runner.run();
 	}
 	
