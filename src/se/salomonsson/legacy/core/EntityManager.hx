@@ -9,8 +9,8 @@ import flash.events.EventDispatcher;
  */
 
 class EntityManager {
-	private static var _entityCounter:Int = 0;
-	private static var _disposedEntities:Array<Int> = new Array<Int>();
+	private var _entityCounter:Int = 0;
+	private var _disposedEntities:Array<Int> = new Array<Int>();
 
 	private var _entities:Array<Int>;
 	private var _entityFlags:Array<Int>;
@@ -86,8 +86,11 @@ class EntityManager {
 	}
 
 
-	public function hasComponent(entity:Int, compClass:Dynamic):Bool { // Remove dynamic?
-		return _entityFlags[entity] & compClass._iFlag != 0;
+	public function hasComponent(entity:Int, compClass:Class<IComponent>):Bool { // Remove dynamic?
+		var a = _entityFlags[entity];
+		var b = (untyped compClass)._sFlag;
+		var c = _entityFlags[entity] & (untyped compClass)._sFlag;
+		return _entityFlags[entity] & (untyped compClass)._sFlag != 0;
 		
 		//var entHash = _entityHash[entity];
 		//for (i in 0...entHash.length) {
@@ -119,7 +122,7 @@ class EntityManager {
 						var comp = a[j];
 						ret.push(untyped __cpp__("comp->__GetRealObject()"));
 						#else
-						var comp = cast(a[j]); //TODO: can we remove this line??
+						//var comp = cast(a[j]); //TODO: can we remove this line??
 						(untyped ret).push(a[j]);
 						#end
 					}

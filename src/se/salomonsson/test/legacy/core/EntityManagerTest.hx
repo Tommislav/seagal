@@ -46,6 +46,16 @@ class EntityManagerTest extends TestCase
 	}
 	
 	
+	public function testHasComponent() {
+		var manager:EntityManager = new EntityManager();
+		var comp:StringComponent = new StringComponent("lala");
+		var ew:EW = manager.allocateEntity().addComponent(comp);
+		assertEquals(true, ew.hasComponent(StringComponent));
+		
+		ew.removeComponent(comp);
+		assertEquals(false, ew.hasComponent(StringComponent));
+	}
+	
 	public function testGetSingleComponent()
 	{
 		var manager = new EntityManager();
