@@ -47,6 +47,12 @@ class EW
 		return this;
 	}
 	
+	public function setTag(tag:String):EW {
+		_manager.setTag(_entity, tag);
+		return this;
+	}
+	
+	
 	/**
 	 * Get component of type <T> registred for this entity.
 	 */

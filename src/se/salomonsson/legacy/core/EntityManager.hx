@@ -1,6 +1,7 @@
 package se.salomonsson.legacy.core;
 import flash.events.Event;
 import flash.events.EventDispatcher;
+import haxe.ds.HashMap;
 
 
 /**
@@ -16,10 +17,7 @@ class EntityManager {
 	private var _entityFlags:Array<Int>;
 	private var _entityComponents:Array<Array<IComponent>>;
 	
-	//private var _entityHash:Array<Array<IComponent>>;
-	
-	
-	
+	private var _tags:Map<String, Int>;
 	
 	
 
@@ -30,8 +28,8 @@ class EntityManager {
 		_entities = new Array<Int>();
 		_entityFlags = new Array<Int>();
 		_entityComponents = new Array<Array<IComponent>>();
-		//_entityHash = new Array<Array<IComponent>>();
 		_eventDispatcher = new EventDispatcher();
+		_tags = new Map<String, Int>();
 	}
 
 	public function allocateEntity():EW {
@@ -41,12 +39,11 @@ class EntityManager {
 		else {
 			entity = _entityCounter++;
 		}
-
+		
 		_entities.push(entity);
 		_entityFlags[entity] = 0;
 		_entityComponents[entity] = new Array<IComponent>();
-		//_entityHash[entity] = new Array<IComponent>();
-
+		
 		return new EW(entity, this);
 	}
 
@@ -55,7 +52,12 @@ class EntityManager {
 			dispatch(new EntityEvent(EntityEvent.ENTITY_DESTROYED, entity, this));
 			_entityComponents[entity] = null;
 			_entityFlags[entity] = 0;
-			//_entityHash[entity] = null;
+			for (key in _tags.keys()) {
+				if (_tags.get(key) == entity) {
+					_tags.remove(key);
+					break;
+				}
+			}
 		}
 		_disposedEntities.push(entity);
 	}
@@ -68,21 +70,11 @@ class EntityManager {
 		
 		_entityFlags[entity] |= component._iFlag;
 		_entityComponents[entity].push(component);
-		//
-		//if (_entityHash[entity] == null) {
-			//#if debug
-			//throw "No such entity exists";
-			//#end
-			//return;
-		//}
-		
-		//_entityHash[entity].push(component);
 	}
 
 	public function removeComponentFrom(component:IComponent, entity:Int):Void {
 		_entityFlags[entity] &= ~component._iFlag;
 		_entityComponents[entity].remove(component);
-		//_entityHash[entity].remove(component);
 	}
 
 
@@ -91,13 +83,6 @@ class EntityManager {
 		var b = (untyped compClass)._sFlag;
 		var c = _entityFlags[entity] & (untyped compClass)._sFlag;
 		return _entityFlags[entity] & (untyped compClass)._sFlag != 0;
-		
-		//var entHash = _entityHash[entity];
-		//for (i in 0...entHash.length) {
-			//if (Std.is(entHash[i], compClass))
-				//return true;
-		//}
-		//return false;
 	}
 
 	/**
@@ -122,28 +107,13 @@ class EntityManager {
 						var comp = a[j];
 						ret.push(untyped __cpp__("comp->__GetRealObject()"));
 						#else
-						//var comp = cast(a[j]); //TODO: can we remove this line??
+						//var comp = cast(a[j]);
 						(untyped ret).push(a[j]);
 						#end
 					}
 				}
 			}
-			
-			
-			//var entHash:Array<IComponent> = _entityHash[e];
-			//for (j in 0...entHash.length) {
-				//if (Std.is(entHash[j], componentClass)) {
-					//#if cpp
-					//var comp = entHash[j];
-					//ret.push(untyped __cpp__("comp->__GetRealObject()"));
-					//#else
-					//var comp = cast(entHash[j]);
-					//(untyped ret).push(entHash[j]);
-					//#end
-				//}
-			//}
 		}
-
 		return ret;
 	}
 
@@ -162,21 +132,11 @@ class EntityManager {
 			}
 		}
 		
-		//var ent = _entityHash[entity];
-
-		//if (ent == null)
-			//return null;
-
-		//for (i in 0...ent.length) {
-			//if (Std.is(ent[i], componentClass))
-				//return cast ent[i]; // TODO: Is it possible to remove this cast?
-		//}
 		return null;
 	}
 
 	public function getAllComponents(entity:Int):Array<IComponent> {
 		var ent = _entityComponents[entity];
-		//var ent = _entityHash[entity];
 		return (ent == null) ? new Array<IComponent>() : ent.copy();
 	}
 
@@ -200,18 +160,6 @@ class EntityManager {
 			}
 		}
 		
-		//for (i in 0..._entities.length) {
-			//var e:Int = _entities[i];
-			//var match = true;
-			//for (j in 0...compClasses.length) {
-				//if (getComponentOnEntity(e, cast compClasses[j]) == null) {
-					//match = false;
-					//break;
-				//}
-			//}
-			//if (match)
-				//a.push(new EW(e, this));
-		//}
 		return a;
 	}
 
@@ -238,6 +186,18 @@ class EntityManager {
 		return null;
 	}
 
+	public function setTag(entity:Int, tag:String) {
+		if (_tags.exists(tag)) {
+			throw "Cannot declare tag '" + tag + "' twice";
+		}
+		_tags.set(tag, entity);
+	}
+	public function getTag(tag:String):EW {
+		if (!_tags.exists(tag)) {
+			throw "Entity with tag '" + tag + "' does not exist!";
+		}
+		return new EW(_tags[tag], this );
+	}
 
 	public function destroy() {
 		var entityClone = _entities.slice(0, -1);

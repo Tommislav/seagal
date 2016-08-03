@@ -1,5 +1,6 @@
 package se.salomonsson.test.legacy.core;
 import haxe.unit.TestCase;
+import openfl.errors.Error;
 import se.salomonsson.legacy.core.EntityManager;
 import se.salomonsson.legacy.core.EW;
 import se.salomonsson.test.legacy.core.comp.NumericComponent;
@@ -167,5 +168,41 @@ class EntityManagerTest extends TestCase
 		assertEquals(1, ew.all().length);
 	}
 	
+	public function testSetTagOnEntity() {
+		var em = new EntityManager();
+		em.allocateEntity().addComponent(new StringComponent("one")).setTag("one");
+		em.allocateEntity().addComponent(new StringComponent("two")).setTag("two");
+		
+		assertEquals("one", em.getTag("one").getComponent(StringComponent).string);
+		assertEquals("two", em.getTag("two").getComponent(StringComponent).string);
+	}
 	
-}
+	public function testGetTagThatDoesNotExist() {
+		var em = new EntityManager();
+		var errorMessage = "no error occured!";
+		
+		try {
+			em.getTag("tag");
+		} catch (err:String) {
+			errorMessage = err;
+		}
+		
+		assertEquals("Entity with tag 'tag' does not exist!", errorMessage);
+	}
+	
+	public function testTagIsRemovedWhenEntityIsDestroyed() {
+		var em = new EntityManager();
+		var e = em.allocateEntity().setTag("tag");
+		e.destroy();
+		
+		var errorMessage = "error was not thrown";
+		
+		try {
+			em.getTag("tag");
+		} catch (err:String) {
+			errorMessage = err;
+		}
+		
+		assertEquals("Entity with tag 'tag' does not exist!", errorMessage);	
+	}
+}	
