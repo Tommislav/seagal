@@ -2,6 +2,7 @@ package se.salomonsson.legacy.core;
 
 /**
  * Stores a lookup procedure for entities based on a number of components.
+ * Not used!
  * @author Tommislav
  */
 class EntityCache

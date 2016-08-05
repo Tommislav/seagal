@@ -1,5 +1,6 @@
 package se.salomonsson.legacy.core;
 import flash.events.EventDispatcher;
+import openfl.events.Event;
 
 /**
  * Holds all the systems. An application can have more than one SystemManager, but usually not.
@@ -84,7 +85,20 @@ class SystemManager {
         _running = true;
     }
 
+	//DEPRECATED!
     public function getEventDispatcher():EventDispatcher { return _dispatcher; }
 
+	public function dispatch(e:Event) {
+		_dispatcher.dispatchEvent(e);
+	}
+
+	public function addListener(type, listener) {
+		_dispatcher.addEventListener(type, listener);
+	}
+
+	public function removeListener(type, listener) {
+		_dispatcher.removeEventListener(type, listener);
+	}
+	
     public function destroy() {}
 }

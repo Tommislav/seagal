@@ -168,41 +168,41 @@ class EntityManagerTest extends TestCase
 		assertEquals(1, ew.all().length);
 	}
 	
-	public function testSetTagOnEntity() {
+	public function testSetNameOnEntity() {
 		var em = new EntityManager();
-		em.allocateEntity().addComponent(new StringComponent("one")).setTag("one");
-		em.allocateEntity().addComponent(new StringComponent("two")).setTag("two");
+		em.allocateEntity().addComponent(new StringComponent("one")).setName("name1");
+		em.allocateEntity().addComponent(new StringComponent("two")).setName("name2");
 		
-		assertEquals("one", em.getTag("one").getComponent(StringComponent).string);
-		assertEquals("two", em.getTag("two").getComponent(StringComponent).string);
+		assertEquals("one", em.getNamedEntity("name1").getComponent(StringComponent).string);
+		assertEquals("two", em.getNamedEntity("name2").getComponent(StringComponent).string);
 	}
 	
-	public function testGetTagThatDoesNotExist() {
+	public function testGetNamedThatDoesNotExist() {
 		var em = new EntityManager();
 		var errorMessage = "no error occured!";
 		
 		try {
-			em.getTag("tag");
+			em.getNamedEntity("name");
 		} catch (err:String) {
 			errorMessage = err;
 		}
 		
-		assertEquals("Entity with tag 'tag' does not exist!", errorMessage);
+		assertEquals("Named entity 'name' does not exist!", errorMessage);
 	}
 	
-	public function testTagIsRemovedWhenEntityIsDestroyed() {
+	public function testNamedIsRemovedWhenEntityIsDestroyed() {
 		var em = new EntityManager();
-		var e = em.allocateEntity().setTag("tag");
+		var e = em.allocateEntity().setName("name");
 		e.destroy();
 		
 		var errorMessage = "error was not thrown";
 		
 		try {
-			em.getTag("tag");
+			em.getNamedEntity("name");
 		} catch (err:String) {
 			errorMessage = err;
 		}
 		
-		assertEquals("Entity with tag 'tag' does not exist!", errorMessage);	
+		assertEquals("Named entity 'name' does not exist!", errorMessage);	
 	}
 }	

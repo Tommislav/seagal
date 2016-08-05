@@ -17,7 +17,8 @@ class EntityManager {
 	private var _entityFlags:Array<Int>;
 	private var _entityComponents:Array<Array<IComponent>>;
 	
-	private var _tags:Map<String, Int>;
+	private var _namedEntities:Map<String, Int>;
+	
 	
 	
 
@@ -29,7 +30,7 @@ class EntityManager {
 		_entityFlags = new Array<Int>();
 		_entityComponents = new Array<Array<IComponent>>();
 		_eventDispatcher = new EventDispatcher();
-		_tags = new Map<String, Int>();
+		_namedEntities = new Map<String, Int>();
 	}
 
 	public function allocateEntity():EW {
@@ -49,12 +50,12 @@ class EntityManager {
 
 	public function destroyEntity(entity:Int):Void {
 		if (_entities.remove(entity)) {
-			dispatch(new EntityEvent(EntityEvent.ENTITY_DESTROYED, entity, this));
+			//dispatch(new EntityEvent(EntityEvent.ENTITY_DESTROYED, entity, this));
 			_entityComponents[entity] = null;
 			_entityFlags[entity] = 0;
-			for (key in _tags.keys()) {
-				if (_tags.get(key) == entity) {
-					_tags.remove(key);
+			for (key in _namedEntities.keys()) {
+				if (_namedEntities.get(key) == entity) {
+					_namedEntities.remove(key);
 					break;
 				}
 			}
@@ -186,19 +187,29 @@ class EntityManager {
 		return null;
 	}
 
-	public function setTag(entity:Int, tag:String) {
-		if (_tags.exists(tag)) {
-			throw "Cannot declare tag '" + tag + "' twice";
+	/**
+	 * Lets you associate a entity with a name. Only one entity can have the same
+	 * name. A faster way to fetch a specific entity (for example, a system entity)
+	 * than to query for getComponent. And if you know you have several system
+	 * components on that entity you can just grab them from the tagged EntityWrapper
+	 * you'll get from getNamed()
+	 */
+	public function setNameOnEntity(entity:Int, name:String) {
+		if (_namedEntities.exists(name)) {
+			throw "Cannot declare name '" + name + "' twice";
 		}
-		_tags.set(tag, entity);
+		_namedEntities.set(name, entity);
 	}
-	public function getTag(tag:String):EW {
-		if (!_tags.exists(tag)) {
-			throw "Entity with tag '" + tag + "' does not exist!";
+	
+	public function getNamedEntity(name:String):EW {
+		if (!_namedEntities.exists(name)) {
+			throw "Named entity '" + name + "' does not exist!";
 		}
-		return new EW(_tags[tag], this );
+		return new EW(_namedEntities[name], this );
 	}
 
+	
+	
 	public function destroy() {
 		var entityClone = _entities.slice(0, -1);
 		for (i in 0...entityClone.length) {
@@ -210,16 +221,20 @@ class EntityManager {
 
 
 
+	// Why should EntityManager have an eventDispatcher???
+	// Makes sense on SystemManager so systems can share a common event bus
+	// but entityManager only makes sense if we are dispatching when adding/removing
+	// components, which we don't, and which we shouldn't because of speed penalty
 
-	public function dispatch(e:Event) {
-		_eventDispatcher.dispatchEvent(e);
-	}
-
-	public function addListener(type, listener) {
-		_eventDispatcher.addEventListener(type, listener);
-	}
-
-	public function removeListener(type, listener) {
-		_eventDispatcher.removeEventListener(type, listener);
-	}
+	//public function dispatch(e:Event) {
+		//_eventDispatcher.dispatchEvent(e);
+	//}
+//
+	//public function addListener(type, listener) {
+		//_eventDispatcher.addEventListener(type, listener);
+	//}
+//
+	//public function removeListener(type, listener) {
+		//_eventDispatcher.removeEventListener(type, listener);
+	//}
 }

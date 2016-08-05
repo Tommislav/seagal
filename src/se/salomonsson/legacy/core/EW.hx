@@ -47,17 +47,23 @@ class EW
 		return this;
 	}
 	
-	public function setTag(tag:String):EW {
-		_manager.setTag(_entity, tag);
+	/**
+	 * Set a unique name for this entity. Good if you have a systemEntity
+	 * for example, with several system components. Always faster to get a
+	 * component from a known entity than to do a query!
+	 * Get the entity by calling entityManager.getNamedEntity(name) // returns EW
+	 */
+	public function setName(name:String):EW {
+		_manager.setNameOnEntity(_entity, name);
 		return this;
 	}
+	
 	
 	
 	/**
 	 * Get component of type <T> registred for this entity.
 	 */
 	public function getComponent<T>(componentClass:Class<T>):T {
-		
 		var comp = _manager.getComponentOnEntity(_entity, componentClass);
 		
 		//if null, create, register and return new instance

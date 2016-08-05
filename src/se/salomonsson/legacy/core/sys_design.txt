@@ -36,7 +36,7 @@ manager.active.getEWC(UpdateComponent);
 manager.getEWC(...args):Array<EW>
 manager.getEWC(MoveComponent):Array<EntWrapper>
 manager.getEWC(MoveComponent,PositionComponent):Array<EntWrapper>
-manager.getNamed(name:String):EW (there can be only one)
+manager.getNamed(name:String):EW (there can be only one) // this is implemented as "getTag()"
 
 manager.getComponentFromEnt(ent:int, CompClass:Class):<T>
 EW.getComponent(CompClass) --> EW.comp(CompClass).value = "hej" // if component is null this will register it for us
